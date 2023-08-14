@@ -1,6 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+const { withHeadlessConfig } = require('@headstartwp/next/config');
+const headlessConfig = require('./headless.config');
 
-module.exports = nextConfig
+/**
+ * Update whatever you need within the nextConfig object.
+ *
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {};
+
+module.exports = withHeadlessConfig(nextConfig, headlessConfig);
