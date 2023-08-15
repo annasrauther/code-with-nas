@@ -8,6 +8,10 @@ const postListStyles = css`
 `;
 
 const PostList = ({ posts, loading, showCategory, showTag }) => {
+  if (loading) {
+    return <p>Loading Recent Posts...</p>;
+  }
+  
   return (
     <div className={postListStyles}>
         {
