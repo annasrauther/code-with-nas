@@ -1,11 +1,12 @@
 import { useAppSettings } from '@headstartwp/next';
-import { css } from '@linaria/core';
 import Link from 'next/link';
 import Image from 'next/image';
+import { css } from '@linaria/core';
 
 const logoStyles = css`
 	text-align: center;
-
+	max-width: 150px;
+	border: none;
 	> span {
 		display: inline-block;
 		color: #000;
@@ -33,8 +34,8 @@ export const Logo = () => {
 			<Image
 				src={'/logo.svg'}
 				alt={data?.settings?.site_name || 'Brand Logo'}
-				width={150}
-				height={100}
+				width={'150'}
+				height={'90'}
 			/>
 		</Link>
 	);

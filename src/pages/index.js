@@ -7,33 +7,22 @@ import {
 	usePosts,
 	useTerms,
 } from '@headstartwp/next';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
-import { Link } from '../components/Link';
 import { singleParams } from '../params';
 import { resolveBatch } from '../utils/promises';
-
-const RecentPost = ({ post }) => {
-	return (
-		<div>
-			<h3>{post.title.rendered}</h3>
-		</div>
-	);
-};
-
-RecentPost.propTypes = {
-	post: PropTypes.shape({ title: PropTypes.shape({ rendered: PropTypes.string }) }).isRequired,
-};
+import Post from '../components/Post';
+import TermList from '../components/TermList';
+import { postListStyles, headingStyles } from '../styles/components';
+import PostList from '@/components/PostList';
 
 const Homepage = ({ homePageSlug }) => {
-	const params = { ...singleParams, slug: homePageSlug };
 
 	// the query below is a client-side-only query
 	const { loading, data } = usePosts(
 		{
 			// you can override any defaults supported by the REST API
 			per_page: 5,
-			// it is recommended to only fetch the fields you need
-			_fields: ['title', 'id'],
 		},
 		// since this is only a client-side query
 		// we want to force revalidating on mount to ensure query runs on mount
@@ -46,27 +35,57 @@ const Homepage = ({ homePageSlug }) => {
 	} = useTerms({ taxonomy: 'category' });
 
 	return (
-		<>
-			{terms.length > 0 ? (
-				<>
-					<h3>Categories</h3>
-					<ul>
-						{terms.map((term) => (
-							<li key={term.id}>
-								<Link href={term.link}>{term.name}</Link>
-							</li>
-						))}
-					</ul>
-				</>
-			) : null}
-			
-			<h2>Recent Posts (loaded client-side)</h2>
-			{loading
-				? 'Loading Recent Posts...'
-				: data.posts.map((post) => <RecentPost key={post.id} post={post} />)}
-
-			
-		</>
+		<div style={{
+			display: 'grid',
+			gap: '5em'
+		}}>
+			<div style={{
+				display: 'grid',
+				justifyContent: 'center',
+				alignItems: 'center',
+				gap: '2em',
+				gridTemplateColumns: '2fr 1fr',
+			}}>
+				<div style={{
+					display: 'grid',
+					justifyContent: 'center',
+					alignItems: 'center',
+					gap: '1em',
+					gridTemplateRows: '5fr 1fr',
+				}}>
+					<h1 className={headingStyles}>Discover short code snippets for all your development needs.</h1>
+					<h3 style={{
+						fontWeight: 'normal',
+						fontSize: '1.2em',
+						lineHeight: '1.2em',
+						margin: '0',
+					}}>Browse snippets by collection or check out our top picks and latest articles below.</h3>
+				</div>
+				<div>
+					<Image src="/hero_banner.svg" alt="Hero Image" width={300} height={300} />
+				</div>
+			</div>
+			<div style={{
+				display: 'grid',
+				justifyContent: 'flex-start',
+				alignItems: 'flex-start',
+				gap: '2em',
+			}}>	
+				<h2 className={headingStyles}>Categories</h2>
+				{terms.length > 0 ? (
+					<TermList terms={terms} />
+					) : null}
+			</div>
+			<div style={{
+				display: 'grid',
+				justifyContent: 'flex-start',
+				alignItems: 'flex-start',
+				gap: '2em',
+			}}>	
+				<h2 className={headingStyles}>Latest Articles</h2>
+				<PostList posts={data.posts} loading={loading} showCategory={true} showTag={true}/>
+			</div>
+		</div>
 	);
 };
 
@@ -104,6 +123,11 @@ export async function getStaticProps(context) {
 			{
 				func: fetchHookData(useTerms.fetcher(), context, {
 					params: { taxonomy: 'category' },
+				}),
+			},
+			{
+				func: fetchHookData(useTerms.fetcher(), context, {
+					params: { taxonomy: 'tag', _fields: ['id','name','link'] },
 				}),
 			},
 		]);

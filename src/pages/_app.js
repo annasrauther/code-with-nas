@@ -11,6 +11,7 @@ const MyApp = ({ Component, pageProps }) => {
     const { fallback = {}, themeJson = {}, ...props } = pageProps;
 
     return (
+        
         <HeadlessApp
             pageProps={pageProps}
             settings={{

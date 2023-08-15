@@ -1,31 +1,22 @@
-import { css } from '@linaria/core';
-
 import { Logo } from './Logo';
-import { Nav } from './Nav';
-import { Search } from './Search';
+import Seperator from '../Seperator';
+import { css } from '@linaria/core';
 
 const headerStyles = css`
 	display: flex;
+	position: relative;
 	align-items: center;
-	justify-content: space-between;
-	height: 75px;
+	justify-content: center;
 	background-color: #fff;
-	border-bottom: 1px solid #e0e0e0;
-	font-family: Roboto;
-	padding: 0 20px;
-
-	> div,
-	> ul {
-		width: 400px;
-	}
+	padding: 10px 20px;
+	border-bottom: 2px solid #000;
 `;
 
 const Header = () => {
 	return (
 		<header role="banner" className={headerStyles}>
-			<Nav />
 			<Logo />
-			<Search />
+			<Seperator />
 		</header>
 	);
 };
