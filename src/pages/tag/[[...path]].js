@@ -1,3 +1,4 @@
+// Import modules
 import {
 	usePosts,
 	fetchHookData,
@@ -5,15 +6,26 @@ import {
 	handleError,
 	useAppSettings,
 } from '@headstartwp/next';
-import PostList from '@/components/PostList';
-import { Pagination } from '../../components/Pagination';
-import { resolveBatch } from '../../utils/promises';
-import { headingStyles, backButtonStyles } from '@/styles/components';
+import { resolveBatch } from '@/utils/promises';
 import Link from 'next/link';
+import Head from 'next/head';
 
+// Import components
+import PostList from '@/components/PostList';
+import { Pagination } from '@/components/Pagination';
+
+// Import styles
+import { headingStyles, backButtonStyles } from '@/styles/components';
+
+/**
+ * Renders a page displaying posts with a specific tag.
+ *
+ * @returns {JSX.Element} - The JSX element representing the tag page.
+ */
 const TagPage = () => {
 	const { data, loading } = usePosts({ taxonomy: 'post_tag' });
 	const pageTitle = data.queriedObject?.term?.name || 'All';
+
 	return (
 		<section style={{
 			display: 'grid',
@@ -21,19 +33,22 @@ const TagPage = () => {
 			alignItems: 'flex-start',
 			gap: '2em',
 		}}>
+			<Head>
+				<title dangerouslySetInnerHTML={{ __html: data.queriedObject?.term?.name || 'Tags' }} />
+			</Head>
 			{
 				data.queriedObject?.term?.name ? <Link className={backButtonStyles} href="/tag">See All Tags</Link> : <Link className={backButtonStyles} href="/">Home</Link>
 			}
 			<h1 style={{
-					display: 'flex',
-					justifyContent: 'center',
-					gap: '10px',
-					borderBottom: '2px solid',
-					paddingBottom: '20px',
-				}}
+				display: 'flex',
+				justifyContent: 'center',
+				gap: '10px',
+				borderBottom: '2px solid',
+				paddingBottom: '20px',
+			}}
 				className={headingStyles}
 			>
-				Tag: <span className="term-title">{ pageTitle }</span>
+				Tag: <span className="term-title">{pageTitle}</span>
 			</h1>
 			<PostList posts={data.posts} loading={loading} showCategory={true} showTag={true} />
 			<Pagination pageInfo={data.pageInfo} />
@@ -41,6 +56,12 @@ const TagPage = () => {
 	);
 };
 
+/**
+ * Fetches data for the tag page.
+ *
+ * @param {object} context - The context object containing request parameters.
+ * @returns {object} - An object containing fetched data for the tag page.
+ */
 export async function getServerSideProps(context) {
 	try {
 		const settledPromises = await resolveBatch([
