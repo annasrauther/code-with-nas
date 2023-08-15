@@ -2,10 +2,11 @@
 Includes Global CSS Styles such as libraries css and WP block library
 */
 
-/* this should match the WordPress version you're supporting
- take this from wp-includes/css/dist/block-library/style.css */
+/* Import the WordPress block library styles.
+   Note: Update the URL to match the WordPress version you're supporting. */
 @import url("https://codewithnas.annasrauther.com/wp-includes/css/dist/block-library/style.css");
 
+/* Reset default padding and margin for various elements */
 html,
 body,
 div,
@@ -26,6 +27,8 @@ a {
 	padding: 0;
 	margin: 0;
 }
+
+/* Apply base styles to HTML and body elements */
 html, body {
 	font-family: system-ui;
 	box-sizing: border-box;
@@ -34,19 +37,22 @@ html, body {
 	background: aliceblue;
 }
 
+/* Style for links */
 a {
 	text-decoration: none;
 	border-bottom: 2px solid #b48a3b;
 	color: #330;
-	
 }
+
+/* Hover, active, and focus styles for links */
 a:hover,
 a:active,
 a:focus {
 	color: #000;
 }
 
+/* Responsive styling for images */
 img {
 	width: 100%;
-    height: auto;
+	height: auto;
 }

@@ -1,118 +1,80 @@
+// Import modules
 import {
 	usePost,
 	fetchHookData,
 	useAppSettings,
 	addHookData,
 	handleError,
-	usePosts,
 	useTerms,
 } from '@headstartwp/next';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
-import { singleParams } from '../params';
-import { resolveBatch } from '../utils/promises';
-import Post from '../components/Post';
-import TermList from '../components/TermList';
-import { postListStyles, headingStyles } from '../styles/components';
-import PostList from '@/components/PostList';
 
-const Homepage = ({ homePageSlug }) => {
+// Import params
+import { singleParams } from '@/params';
 
-	// the query below is a client-side-only query
-	const { loading, data } = usePosts(
-		{
-			// you can override any defaults supported by the REST API
-			per_page: 5,
-		},
-		// since this is only a client-side query
-		// we want to force revalidating on mount to ensure query runs on mount
-		// this is required bc we have disabled revalidateOnMount globally in _app.js
-		{ swr: { revalidateOnMount: true } },
-	);
+// Import utils
+import { resolveBatch } from '@/utils/promises';
 
-	const {
-		data: { terms },
-	} = useTerms({ taxonomy: 'category' });
+// Import components
+import Hero from '@/components/Hero';
+import HeroCategoriesSection from '@/components/HeroCategoriesSection';
+import LatestArticleSection from '@/components/LatestArticleSection';
 
-	return (
-		<div style={{
-			display: 'grid',
-			gap: '5em'
-		}}>
-			<div style={{
-				display: 'grid',
-				justifyContent: 'center',
-				alignItems: 'center',
-				gap: '2em',
-				gridTemplateColumns: '2fr 1fr',
-			}}>
-				<div style={{
-					display: 'grid',
-					justifyContent: 'center',
-					alignItems: 'center',
-					gap: '1em',
-					gridTemplateRows: '5fr 1fr',
-				}}>
-					<h1 className={headingStyles}>Discover short code snippets for all your development needs.</h1>
-					<h3 style={{
-						fontWeight: 'normal',
-						fontSize: '1.2em',
-						lineHeight: '1.2em',
-						margin: '0',
-					}}>Browse snippets by collection or check out our top picks and latest articles below.</h3>
-				</div>
-				<div>
-					<Image src="/hero_banner.svg" alt="Hero Image" width={300} height={300} />
-				</div>
-			</div>
-			<div style={{
-				display: 'grid',
-				justifyContent: 'flex-start',
-				alignItems: 'flex-start',
-				gap: '2em',
-			}}>	
-				<h2 className={headingStyles}>Categories</h2>
-				{terms.length > 0 ? (
-					<TermList terms={terms} />
-					) : null}
-			</div>
-			<div style={{
-				display: 'grid',
-				justifyContent: 'flex-start',
-				alignItems: 'flex-start',
-				gap: '2em',
-			}}>	
-				<h2 className={headingStyles}>Latest Articles</h2>
-				<PostList posts={data.posts} loading={loading} showCategory={true} showTag={true}/>
-			</div>
-		</div>
-	);
-};
+/**
+ * Homepage component that displays code snippets and articles.
+ *
+ * @param {Object} props - Component props.
+ * @param {string} props.homePageSlug - Slug for the homepage.
+ * @param {Array} props.terms - List of category terms.
+ * @param {Array} props.posts - List of latest posts.
+ * @param {boolean} props.loading - Loading state.
+ * @returns {JSX.Element} - Homepage JSX element.
+ */
+const Homepage = ({ terms, posts, loading }) => (
+	<div style={{ display: 'grid', gap: '5em' }}>
+		{/* Hero section */}
+		<Hero />
+		{/* Categories section */}
+		<HeroCategoriesSection terms={terms} />
+		{/* Latest Articles section */}
+		<LatestArticleSection posts={posts} loading={loading} />
+	</div>
+);
 
 Homepage.propTypes = {
-	homePageSlug: PropTypes.string.isRequired,
+	terms: PropTypes.array.isRequired,
+	posts: PropTypes.array.isRequired,
+	loading: PropTypes.bool.isRequired,
 };
 
 export default Homepage;
 
+/**
+ * Fetches data and returns props for the Homepage component.
+ *
+ * @param {Object} context - Context object for getStaticProps.
+ * @returns {Object} - Props for the Homepage component.
+ */
 export async function getStaticProps(context) {
 	let appSettings;
 	let slug;
 	try {
+		// Fetch app settings
 		appSettings = await fetchHookData(useAppSettings.fetcher(), context);
-		/**
-		 * The static front-page can be set in the WP admin. The default one will be 'front-page'
-		 */
+		// Determine the slug for the homepage based on app settings
 		slug = appSettings.data.result?.home?.slug ?? 'front-page';
 	} catch (e) {
 		if (e.name === 'EndpointError') {
+			// Use a default slug if an error occurs
 			slug = 'front-page';
 		}
 	}
 
 	try {
+		// Fetch data for the Homepage component using batched requests
 		const hookData = await resolveBatch([
 			{
+				// Fetch a single post based on the determined slug
 				func: fetchHookData(usePost.fetcher(), context, {
 					params: {
 						...singleParams,
@@ -121,22 +83,41 @@ export async function getStaticProps(context) {
 				}),
 			},
 			{
+				// Fetch category terms
 				func: fetchHookData(useTerms.fetcher(), context, {
 					params: { taxonomy: 'category' },
 				}),
 			},
 			{
+				// Fetch tag terms with specific fields
 				func: fetchHookData(useTerms.fetcher(), context, {
-					params: { taxonomy: 'tag', _fields: ['id','name','link'] },
+					params: { taxonomy: 'tag', _fields: ['id', 'name', 'link'] },
 				}),
 			},
 		]);
 
+		// Extract data from hook results
+		const { data: postData } = hookData[0];
+		const { data: categoryData } = hookData[1];
+		const { data: tagData } = hookData[2];
+
+		// Construct terms array with category data
+		const terms = categoryData.terms || []; // Ensure terms array is defined
+
+		// Construct posts array with post data
+		const posts = postData.post ? [postData.post] : [];
+
+		// Determine loading state
+		const loading =
+			postData.loading || categoryData.loading || tagData.loading || false;
+
+		// Return props with fetched data and revalidation interval
 		return addHookData([...hookData, appSettings], {
-			props: { homePageSlug: slug },
-			revalidate: 5 * 60,
+			props: { homePageSlug: slug, terms, posts, loading },
+			revalidate: 5 * 60, // Revalidate every 5 minutes
 		});
 	} catch (e) {
+		// Handle errors and return appropriate error response
 		return handleError(e, context);
 	}
 }
