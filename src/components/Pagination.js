@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import { Link } from './Link';
+import Link from './Link';
 
 const PaginationContainer = styled.ul`
 	list-style-type: none;
