@@ -1,6 +1,6 @@
 // Import modules
 import {
-	usePost,
+	usePosts,
 	fetchHookData,
 	useAppSettings,
 	addHookData,
@@ -8,6 +8,7 @@ import {
 	useTerms,
 } from '@headstartwp/next';
 import PropTypes from 'prop-types';
+import Head from 'next/head';
 
 // Import params
 import { singleParams } from '@/params';
@@ -24,30 +25,35 @@ import LatestArticleSection from '@/components/LatestArticleSection';
  * Homepage component that displays code snippets and articles.
  *
  * @param {Object} props - Component props.
- * @param {string} props.homePageSlug - Slug for the homepage.
  * @param {Array} props.terms - List of category terms.
  * @param {Array} props.posts - List of latest posts.
  * @param {boolean} props.loading - Loading state.
  * @returns {JSX.Element} - Homepage JSX element.
  */
-const Homepage = ({ terms, posts, loading }) => (
-	<div style={{ display: 'grid', gap: '5em' }}>
-		{/* Hero section */}
-		<Hero />
-		{/* Categories section */}
-		<HeroCategoriesSection terms={terms} />
-		{/* Latest Articles section */}
-		<LatestArticleSection posts={posts} loading={loading} />
-	</div>
-);
+const Homepage = ({ terms, posts, loading }) => {
+	return (
+		<div style={{ display: 'grid', gap: '5em' }}>
+			<Head>
+				<title>Code with Nas - Homepage</title>
+			</Head>
+
+			{/* Hero section */}
+			<Hero />
+			
+			{/* Categories section */}
+			<HeroCategoriesSection terms={terms} />
+			
+			{/* Latest Articles section */}
+			<LatestArticleSection posts={posts} loading={loading} />
+		</div>
+	);
+}
 
 Homepage.propTypes = {
 	terms: PropTypes.array.isRequired,
 	posts: PropTypes.array.isRequired,
 	loading: PropTypes.bool.isRequired,
 };
-
-export default Homepage;
 
 /**
  * Fetches data and returns props for the Homepage component.
@@ -74,11 +80,10 @@ export async function getStaticProps(context) {
 		// Fetch data for the Homepage component using batched requests
 		const hookData = await resolveBatch([
 			{
-				// Fetch a single post based on the determined slug
-				func: fetchHookData(usePost.fetcher(), context, {
+				// Fetch posts using usePosts hook
+				func: fetchHookData(usePosts.fetcher(), context, {
 					params: {
-						...singleParams,
-						slug,
+						per_page: 5,
 					},
 				}),
 			},
@@ -97,19 +102,19 @@ export async function getStaticProps(context) {
 		]);
 
 		// Extract data from hook results
-		const { data: postData } = hookData[0];
-		const { data: categoryData } = hookData[1];
-		const { data: tagData } = hookData[2];
+		const postsData = hookData[0]; // Use index 0 to access posts data
+		const categoryData = hookData[1]; // Use index 1 to access category data
+		const tagData = hookData[2]; // Use index 2 to access tag data
 
 		// Construct terms array with category data
-		const terms = categoryData.terms || []; // Ensure terms array is defined
+		const terms = categoryData.data.result || []; // Ensure terms array is defined
 
-		// Construct posts array with post data
-		const posts = postData.post ? [postData.post] : [];
+		// Construct posts array with posts data
+		const posts = postsData.data.result || []; // Ensure posts array is defined
 
 		// Determine loading state
 		const loading =
-			postData.loading || categoryData.loading || tagData.loading || false;
+			postsData.loading || categoryData.loading || tagData.loading || false;
 
 		// Return props with fetched data and revalidation interval
 		return addHookData([...hookData, appSettings], {
@@ -121,3 +126,5 @@ export async function getStaticProps(context) {
 		return handleError(e, context);
 	}
 }
+
+export default Homepage;
