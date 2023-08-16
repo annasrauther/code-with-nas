@@ -4,12 +4,23 @@ import PropTypes from 'prop-types';
 import Link from './Link';
 
 const PaginationContainer = styled.ul`
-	list-style-type: none;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	gap: 1em;
+	border-top: 2px solid;
+	padding-top: 0.5em;
 `;
 
 const PaginationItem = styled.li`
-	display: inline;
-	margin-right: 5px;
+	background: #030;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 3px;
+	a {
+		color: white;
+		border: none;
+	}
 `;
 
 export const Pagination = ({ pageInfo }) => {

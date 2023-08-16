@@ -8,36 +8,14 @@ const postStyles = css`
     display: grid;
     grid-template-columns: 1fr;
     gap: 1em;
-    padding: 1em 2em;
     position: relative;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     @media (min-width: 768px) {
         grid-template-columns: 1fr 2fr;
     }
 
-    :before,
-    :after {
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        content: "";
-        display: block;
-        height: 29px;
-        position: absolute;
-        width: 29px;
-    }
-    :before {
-        background-image: url(https://design-milk.com/assets/images/display/corner-decoration-top-left.svg);
-        left: 0;
-        top: 0;
-    }
-
-    :after {
-        background-image: url(https://design-milk.com/assets/images/display/corner-decoration-bottom-right.svg);
-        bottom: 0;
-        right: 0;
-    }
     a {
         border: none;
     }
@@ -66,14 +44,11 @@ const postStyles = css`
     }
 
     .recent-post__category {
-        width: 100%;
         text-align: center;
         display: flex;
         gap: 1em;
         flex-wrap: wrap;
-        border-top: 1px solid #330;
-        border-bottom: 1px solid #330;
-        padding: 0.6em 0.5em 0.8em;
+        
         h4 {
             font-size: 12px;
             padding: 5px 10px;
@@ -91,28 +66,38 @@ const postStyles = css`
 `;
 
 const Post = ({ post, showCategory, showTag }) => {
-	return (
+    return (
 		<div className={postStyles}>
 			<div className="recent-post__image">
-				<Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
+                {
+                    post._embedded['wp:featuredmedia'] ? (
+                        <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
+                    ): <Image src="/post-placeholder.avif" alt={post.title.rendered} width={300} height={300} />
+                }
 			</div>
 			<div className="recent-post__content">				
-				<Link href={post.link}>
-					<h3 className="recent-post__content-title" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-				</Link>
 				<div className="recent-post__category">
                     {
-                        showCategory ? (
-                            <Badge term={post._embedded['wp:term'][0][0]} />
+                        showCategory && post._embedded['wp:term'][0] && post._embedded['wp:term'][0].length
+                        ? (
+                            <Badge term={post._embedded['wp:term'][0][0]} type={'category'} />
                         ): null
                     }
 					{
-						showTag ? post._embedded['wp:term'][1].map((term) => (
-							<Badge key={term.id} term={term} />
+						showTag && post._embedded['wp:term'][1] && post._embedded['wp:term'][1].length
+                        ? post._embedded['wp:term'][1].map((term) => (
+							<Badge key={term.id} term={term} type={'tag'} />
 						)): null
 					}
 				</div>
-				<div className="recent-post__description" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+				<Link href={post.link}>
+					<h3 className="recent-post__content-title" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+				</Link>
+                {
+                    post.excerpt.rendered ? (
+                        <div className="recent-post__description" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
+                    ): null
+                }
 			</div>
 		</div>
 	);

@@ -12,13 +12,13 @@ const termListStyles = css`
 	gap: 1em;
 `;
 
-const TermList = ({ terms }) => {
+const TermList = ({ terms, type }) => {
 	return (
 		<ul className={termListStyles}>
 			{
 				terms.map((term) => (
 					<li key={term.id}>
-						<Badge term={term} />
+						<Badge term={term} type={type} />
 					</li>
 				))
 			}
@@ -28,6 +28,7 @@ const TermList = ({ terms }) => {
 
 TermList.propTypes = {
     terms: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.number })).isRequired,
+	type: PropTypes.oneOf(['category', 'tag']).isRequired
 };
 
 export default TermList;

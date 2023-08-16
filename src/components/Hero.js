@@ -1,32 +1,27 @@
 // Import modules
 import Image from 'next/image';
+import PropTypes from 'prop-types';
+
+// Import components
+import HeroCategoriesSection from '@/components/HeroCategoriesSection';
 
 // Import styles
-import { headingStyles } from '@/styles/components';
+import { headingStyles, heroStyles } from '@/styles/components';
 
 /**
  * Hero component for the homepage.
  *
  * @returns {JSX.Element} - Hero JSX element.
  */
-const Hero = () => (
-	<div
-		style={{
-			display: 'grid',
-			justifyContent: 'center',
-			alignItems: 'center',
-			gap: '2em',
-			gridTemplateColumns: '2fr 1fr',
-		}}
-	>
+const Hero = ({terms}) => (
+	<div className={heroStyles}>
 		{/* Text content */}
 		<div
 			style={{
 				display: 'grid',
 				justifyContent: 'center',
 				alignItems: 'center',
-				gap: '1em',
-				gridTemplateRows: '5fr 1fr',
+				gap: '2em',
 			}}
 		>
 			<h1 className={headingStyles}>Discover short code snippets for all your development needs.</h1>
@@ -40,6 +35,7 @@ const Hero = () => (
 			>
 				Browse snippets by collection or check out our top picks and latest articles below.
 			</h3>
+			<HeroCategoriesSection terms={terms} />
 		</div>
 		{/* Hero Image */}
 		<div>
@@ -47,5 +43,9 @@ const Hero = () => (
 		</div>
 	</div>
 );
+
+Hero.propTypes = {
+	terms: PropTypes.array.isRequired,
+};
 
 export default Hero;

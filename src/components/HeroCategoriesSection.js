@@ -23,9 +23,8 @@ const HeroCategoriesSection = ({ terms }) => (
 			gap: '2em',
 		}}
 	>
-		<h2 className={headingStyles}>Categories</h2>
 		{/* Display category terms if available */}
-		{terms.length > 0 ? <TermList terms={terms} /> : null}
+		{terms.length > 0 ? <TermList terms={terms} type={'category'}/> : null}
 	</div>
 );
 
