@@ -12,19 +12,21 @@ import Head from 'next/head';
 
 // Import components
 import PostList from '@/components/PostList';
-import { Pagination } from '@/components/Pagination';
 
 // Import styles
 import { headingStyles, backButtonStyles } from '@/styles/components';
 
 /**
- * Renders a page displaying posts with a specific tag.
+ * Renders a page displaying posts with all tag.
  *
  * @returns {JSX.Element} - The JSX element representing the tag page.
  */
 const TagPage = () => {
 	const { data, loading } = usePosts({ taxonomy: 'post_tag' });
-	const pageTitle = data.queriedObject?.term?.name || 'All';
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
 	return (
 		<section style={{
@@ -34,11 +36,9 @@ const TagPage = () => {
 			gap: '2em',
 		}}>
 			<Head>
-				<title dangerouslySetInnerHTML={{ __html: data.queriedObject?.term?.name || 'Tags' }} />
+                <title>{ 'Code with Nas - Tags' }</title>
 			</Head>
-			{
-				data.queriedObject?.term?.name ? <Link className={backButtonStyles} href="/tag">See All Tags</Link> : <Link className={backButtonStyles} href="/">Home</Link>
-			}
+            <Link className={backButtonStyles} href="/">Home</Link>
 			<h1 style={{
 				display: 'flex',
 				justifyContent: 'center',
@@ -48,10 +48,9 @@ const TagPage = () => {
 			}}
 				className={headingStyles}
 			>
-				Tag: <span className="term-title">{pageTitle}</span>
+				Tags: <span className="term-title">Latest</span>
 			</h1>
-			<PostList posts={data.posts} loading={loading} showCategory={true} showTag={true} />
-			<Pagination pageInfo={data.pageInfo} />
+            <PostList posts={data.posts} loading={loading} showCategory={true} showTag={true} />
 		</section>
 	);
 };
@@ -67,7 +66,7 @@ export async function getServerSideProps(context) {
 		const settledPromises = await resolveBatch([
 			{
 				func: fetchHookData(usePosts.fetcher(), context, {
-					params: { taxonomy: 'post_tag' },
+					params: { taxonomy: 'post_tag', per_page: 20 },
 				}),
 			},
 			{ func: fetchHookData(useAppSettings.fetcher(), context), throw: false },
