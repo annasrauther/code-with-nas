@@ -43,6 +43,9 @@ export const headingStyles = css`
  * Styles for a single post.
  */
 export const singlePostStyles = css`
+  width: clamp(300px, 95vw, 700px);
+  margin: 0 auto;
+
   .post-category {
     text-align: center;
     display: flex;
@@ -131,13 +134,63 @@ export const singlePostStyles = css`
       border-radius: 3px;
       border: 1px solid;
       margin: 0 2px;
-      background: #330;
+      background: #b48a3b;
       color: white;
     }
     .wp-block-code code {
       display: block;
       padding: 1em 2em;
       margin-bottom: 2em;
+      background: #330;
+      color: white;
     }
   }
+`;
+
+export const latestArticleStyles = css`
+  display: grid;
+  gap: 2em;
+  align-items: flex-start;
+  grid-template-columns: 1fr;
+
+  .col-side,
+  .col-main {
+    > div {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: 3fr 6fr 3fr;
+    
+    .col-side {
+      gap: 2em;
+      display: grid;
+
+      .recent-post__content-title {
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
+      }
+    }
+    .col-main {
+      .recent-post__content-title {
+        font-size: 30px;
+        line-height: 34px;
+        font-weight: 700;
+      }
+    }
+  }
+`;
+
+export const heroStyles = css`
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    grid-template-columns: 1fr;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 2fr 1fr;
+    }
 `;

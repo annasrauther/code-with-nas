@@ -30,7 +30,7 @@ a {
 
 /* Apply base styles to HTML and body elements */
 html, body {
-	font-family: system-ui;
+	font-family: 'Nunito', sans-serif;
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	color: #330;
