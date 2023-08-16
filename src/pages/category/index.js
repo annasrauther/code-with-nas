@@ -13,13 +13,12 @@ import Head from 'next/head';
 
 // Import components
 import PostList from '@/components/PostList';
-import { Pagination } from '@/components/Pagination';
 
 // Import styles
 import { headingStyles, backButtonStyles } from '@/styles/components';
 
 /**
- * Renders a page displaying posts in a specific category.
+ * Renders a page displaying posts in all category.
  *
  * @returns {JSX.Element} - The JSX element representing the category page.
  */
@@ -43,8 +42,6 @@ const CategoryPage = () => {
 		return <p>Error loading tags: {termsError.message}</p>;
 	}
 
-	const pageTitle = data.queriedObject?.term?.name || 'All';
-
 	return (
 		<section style={{
 			display: 'grid',
@@ -53,11 +50,9 @@ const CategoryPage = () => {
 			gap: '2em',
 		}}>
 			<Head>
-				<title dangerouslySetInnerHTML={{ __html: data.queriedObject?.term?.name || 'Code with Nas - Categories' }} />
+				<title>{ 'Code with Nas - Categories' }</title>
 			</Head>
-			{
-				data.queriedObject?.term?.name ? <Link className={backButtonStyles} href="/category">See All Categories</Link> : <Link className={backButtonStyles} href="/">Home</Link>
-			}
+			<Link className={backButtonStyles} href="/">Home</Link>
 			<h1 style={{
 				display: 'flex',
 				justifyContent: 'center',
@@ -67,10 +62,9 @@ const CategoryPage = () => {
 			}}
 				className={headingStyles}
 			>
-				Category: <span className="term-title">{pageTitle}</span>
+				Category: <span className="term-title">Latest</span>
 			</h1>
 			<PostList posts={data.posts} loading={loading} showCategory={false} showTag={true} />
-			<Pagination pageInfo={data.pageInfo} />
 		</section>
 	);
 };

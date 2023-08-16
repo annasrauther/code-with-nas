@@ -2,6 +2,7 @@
 import { usePost, fetchHookData, addHookData, handleError } from '@headstartwp/next';
 import { BlocksRenderer } from '@headstartwp/core/react';
 import Head from 'next/head';
+import Image from 'next/image';
 
 // Import components
 import Badge from '@/components/Badge';
@@ -27,11 +28,19 @@ const SinglePostsPage = () => {
         return 'Error...';
     }
 
+    console.log(data);
+
     return (
         <div className={singlePostStyles}>
             <Head>
-                <title dangerouslySetInnerHTML={{ __html: data.post.title.rendered }} />
+                <title>{data.post.title.rendered}</title>
             </Head>
+            <Image
+                src={data.post._embedded['wp:featuredmedia'][0].source_url}
+                alt={data.post._embedded['wp:featuredmedia'][0].alt_text}
+                width={data.post._embedded['wp:featuredmedia'][0].media_details.width}
+                height={data.post._embedded['wp:featuredmedia'][0].media_details.height}
+            />
             <h1
                 style={{
                     textAlign: 'center',
@@ -42,9 +51,9 @@ const SinglePostsPage = () => {
                 dangerouslySetInnerHTML={{ __html: data.post.title.rendered }}
             />
             <div className="post-category">
-                <Badge term={data.post._embedded['wp:term'][0][0]} />
+                <Badge term={data.post._embedded['wp:term'][0][0]} type={'category'}/>
                 {data.post._embedded['wp:term'][1].map((term) => (
-                    <Badge key={term.id} term={term} />
+                    <Badge key={term.id} term={term} type={'tag'}/>
                 ))}
             </div>
             <div className="post-content">

@@ -5,9 +5,8 @@ import { MainContent } from './MainContent';
 import { css } from '@linaria/core';
 
 const layoutStyles = css`
-	width: clamp(250px, 85vw, 800px);
+	width: clamp(300px, 95vw, 1400px);
 	margin: 0 auto;
-	min-height: 80vh;
 `;
 const Layout = ({ children }) => {
 	return (

@@ -18,7 +18,6 @@ import { resolveBatch } from '@/utils/promises';
 
 // Import components
 import Hero from '@/components/Hero';
-import HeroCategoriesSection from '@/components/HeroCategoriesSection';
 import LatestArticleSection from '@/components/LatestArticleSection';
 
 /**
@@ -32,16 +31,13 @@ import LatestArticleSection from '@/components/LatestArticleSection';
  */
 const Homepage = ({ terms, posts, loading }) => {
 	return (
-		<div style={{ display: 'grid', gap: '5em' }}>
+		<div style={{ display: 'grid', gap: '3em' }}>
 			<Head>
 				<title>Code with Nas - Homepage</title>
 			</Head>
 
 			{/* Hero section */}
-			<Hero />
-			
-			{/* Categories section */}
-			<HeroCategoriesSection terms={terms} />
+			<Hero terms={terms}/>
 			
 			{/* Latest Articles section */}
 			<LatestArticleSection posts={posts} loading={loading} />
