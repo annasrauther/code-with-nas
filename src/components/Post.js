@@ -84,7 +84,7 @@ const Post = ({ post, showCategory, showTag }) => {
                 {
                     post._embedded['wp:featuredmedia'] ? (
                         <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
-                    ): <Image src="/post-placeholder.webp" alt={post.title.rendered} width={300} height={300} />
+                    ): <Image src="/post-placeholder.avif" alt={post.title.rendered} width={300} height={300} />
                 }
 			</div>
 			<div className="recent-post__content">				

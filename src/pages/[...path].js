@@ -27,7 +27,7 @@ const SinglePostsPage = () => {
         return 'Error...';
     }
 
-    const postBackgroundImage = data.post._embedded['wp:featuredmedia']?.length > 0 ? data.post._embedded['wp:featuredmedia'][0].source_url : '/post-placeholder.webp';
+    const postBackgroundImage = data.post._embedded['wp:featuredmedia']?.length > 0 ? data.post._embedded['wp:featuredmedia'][0].source_url : '/post-placeholder.avif';
 
     return (
         <div className={singlePostStyles}>
