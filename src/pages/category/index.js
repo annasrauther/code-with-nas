@@ -26,7 +26,7 @@ const CategoryPage = () => {
 	const {
 		data,
 		loading,
-	} = usePosts({ taxonomy: 'category' });
+	} = usePosts({ taxonomy: 'category', per_page: 12 });
 
 	const {
 		data: { terms },

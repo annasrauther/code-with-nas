@@ -6,16 +6,19 @@ import { css } from '@linaria/core';
 export const backButtonStyles = css`
   text-align: center;
   padding: 0.25em;
-  border: 1px solid #030;
+  border: 1px solid #330;
   font-size: 1.5em;
   font-weight: 200;
   text-transform: uppercase;
   letter-spacing: 4px;
   background: #fff;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border-radius: 5px;
   transition: all 0.2s ease;
   :hover {
-    background: #eee;
-    border-radius: 5px;
+    background: #330;
+    color: #fff;
   }
 `;
 
@@ -23,19 +26,24 @@ export const backButtonStyles = css`
  * Styles for headings with term title.
  */
 export const headingStyles = css`
-  font-size: clamp(2em, 10vw + 1em, 3em);
+  font-size: clamp(2em,6vw + 1em,3em);
   font-weight: bold;
   color: #330;
+  text-transform: uppercase;
+  text-shadow: 1px 1px rgba(0,0,0,0.1);
 
   span.term-title {
     background: #330;
     color: white;
     border: 1px solid #330;
-    padding: 5px 10px;
     border-radius: 5px;
     text-transform: uppercase;
-    font-size: 0.8em;
     font-weight: 900;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5em;
   }
 `;
 
@@ -43,9 +51,6 @@ export const headingStyles = css`
  * Styles for a single post.
  */
 export const singlePostStyles = css`
-  width: clamp(300px, 95vw, 700px);
-  margin: 0 auto;
-
   .post-category {
     text-align: center;
     display: flex;
@@ -55,7 +60,7 @@ export const singlePostStyles = css`
     padding-left: 1em;
     padding-bottom: 1em;
     margin: 1em 0;
-    border-bottom: 2px solid;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
     a {
       border: none;
     }
@@ -67,7 +72,10 @@ export const singlePostStyles = css`
   }
 
   .post-content {
-    padding: 1em;
+    padding: 2em 1.5em;
+    background: white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.1);
 
     h1,
     h2,
@@ -117,7 +125,7 @@ export const singlePostStyles = css`
     }
 
     p {
-      margin-bottom: 0.5em;
+      margin-bottom: 1em;
     }
 
     figure {
@@ -157,28 +165,6 @@ export const latestArticleStyles = css`
   .col-main {
     > div {
       grid-template-columns: 1fr;
-    }
-  }
-
-  @media (min-width: 992px) {
-    grid-template-columns: 3fr 6fr 3fr;
-    
-    .col-side {
-      gap: 2em;
-      display: grid;
-
-      .recent-post__content-title {
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 24px;
-      }
-    }
-    .col-main {
-      .recent-post__content-title {
-        font-size: 30px;
-        line-height: 34px;
-        font-weight: 700;
-      }
     }
   }
 `;

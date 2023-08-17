@@ -34,7 +34,6 @@ html, body {
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	color: #330;
-	background: aliceblue;
 }
 
 /* Style for links */
@@ -55,4 +54,10 @@ a:focus {
 img {
 	width: 100%;
 	height: auto;
+}
+
+.container {
+	padding: clamp(10px, 5vw, 3em);
+	max-width: 1800px;
+	margin: 0 auto;
 }

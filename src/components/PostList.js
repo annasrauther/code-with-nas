@@ -4,7 +4,8 @@ import { css } from '@linaria/core';
 
 const postListStyles = css`
     display: grid;
-    gap: 3em;
+    gap: 0.5em;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 `;
 
 const PostList = ({ posts, loading, showCategory, showTag }) => {
@@ -15,9 +16,7 @@ const PostList = ({ posts, loading, showCategory, showTag }) => {
   return (
     <div className={postListStyles}>
         {
-            loading
-            ? 'Loading Recent Posts...'
-            : posts.map((post) => <Post key={post.id} post={post} showCategory={showCategory} showTag={showTag} />)
+          posts.map((post) => <Post key={post.id} post={post} showCategory={showCategory} showTag={showTag} />)
         }
     </div>
   )

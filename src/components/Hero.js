@@ -14,7 +14,7 @@ import { headingStyles, heroStyles } from '@/styles/components';
  * @returns {JSX.Element} - Hero JSX element.
  */
 const Hero = ({terms}) => (
-	<div className={heroStyles}>
+	<div className={`${heroStyles} container`}>
 		{/* Text content */}
 		<div
 			style={{
