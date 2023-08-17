@@ -6,7 +6,7 @@ import { css } from '@linaria/core';
 
 const layoutStyles = css`
 	margin: 0 auto;
-	padding: 5px;
+	padding: 0.5em;
 `;
 const Layout = ({ children }) => {
 	return (
