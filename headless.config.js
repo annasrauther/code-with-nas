@@ -5,6 +5,7 @@
  */
 module.exports = {
     sourceUrl: process.env.NEXT_PUBLIC_HEADLESS_WP_URL,
+	hostUrl: process.env.NEXT_PUBLIC_HOST_URL,
     useWordPressPlugin: true,
     customTaxonomies: [
 		// this is just an example
