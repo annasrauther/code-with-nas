@@ -1,22 +1,20 @@
-import { Logo } from './Logo';
-import Seperator from '../Seperator';
 import { css } from '@linaria/core';
+import { Logo } from './Logo';
 
 const headerStyles = css`
 	display: flex;
 	position: relative;
 	align-items: center;
 	justify-content: center;
-	background-color: #fff;
+	background-color: aliceblue;
 	padding: 10px 20px;
-	border-bottom: 2px solid #000;
+	border-bottom: 2px solid rgba(0,0,0,0.1);
 `;
 
 const Header = () => {
 	return (
 		<header role="banner" className={headerStyles}>
 			<Logo />
-			<Seperator />
 		</header>
 	);
 };

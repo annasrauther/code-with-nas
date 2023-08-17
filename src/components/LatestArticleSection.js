@@ -2,10 +2,11 @@
 import PropTypes from 'prop-types';
 
 // Import components
-import Post from '@/components/Post';
 
 // Import styles
 import { headingStyles, latestArticleStyles } from '@/styles/components';
+import PostList from './PostList';
+import Seperator from './Seperator';
 
 /**
  * Latest articles section component for the homepage.
@@ -21,28 +22,18 @@ const LatestArticleSection = ({ posts, loading }) => {
 	}
 
 	return (
-		<div
-			style={{
-				display: 'grid',
-				justifyContent: 'flex-start',
-				alignItems: 'flex-start',
-				gap: '2em',
-			}}
-		>
-			<h2 className={headingStyles}>Latest Articles</h2>
+		<div style={{
+			display: 'grid',
+			justifyContent: 'flex-start',
+			alignItems: 'flex-start',
+		}}>
+			<h2 style={{
+				textAlign: 'center',
+			}} className={headingStyles}>Latest Articles</h2>
+			<Seperator size={2} />
 			{/* Display list of latest posts */}
 			<div className={latestArticleStyles}>
-				<div className="col-side">
-					<Post key={posts[0].id} post={posts[0]} showCategory={true} showTag={true} />
-					<Post key={posts[1].id} post={posts[1]} showCategory={true} showTag={true} />
-				</div>
-				<div className="col-main">
-					<Post key={posts[2].id} post={posts[2]} showCategory={true} showTag={true} />
-				</div>
-				<div className="col-side">
-					<Post key={posts[3].id} post={posts[3]} showCategory={true} showTag={true} />
-					<Post key={posts[4].id} post={posts[4]} showCategory={true} showTag={true} />
-				</div>
+				<PostList posts={posts} loading={loading} showCategory={true} showTag={true} />
 			</div>
 		</div>
 	)

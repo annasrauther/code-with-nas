@@ -4,7 +4,7 @@ import { css, cx } from '@linaria/core';
 
 const badgeStyles = css`
 	background: #fff;
-	border: 1px solid;
+	border: 1px solid rgba(0,0,0,0.1);
 	display: inline-block;
 	font-size: 12px;
 	font-weight: 400;
@@ -15,12 +15,14 @@ const badgeStyles = css`
 	text-decoration: none;
 	text-transform: uppercase
 	margin: 0;
-	color: #030;
+	color: #330;
 	border-radius: 3px;
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
 	transition: all 0.2s ease;
 
     :hover {
-		background: #eee;
+		background: #330;
+		color: #fff;
 	}
 `;
 

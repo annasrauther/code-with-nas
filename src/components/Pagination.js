@@ -8,18 +8,28 @@ const PaginationContainer = styled.ul`
 	width: 100%;
 	justify-content: center;
 	gap: 1em;
-	border-top: 2px solid;
+	border-top: 2px solid rgba(0,0,0,0.1);
 	padding-top: 0.5em;
 `;
 
 const PaginationItem = styled.li`
-	background: #030;
-	color: white;
+	background: white;
 	padding: 5px 10px;
 	border-radius: 3px;
+	border: 1px solid rgba(0,0,0,0.1);
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+	transition: all 0.3s ease;
+	list-style: none;
 	a {
-		color: white;
+		color: black;
 		border: none;
+	}
+	:hover {
+		background: #330;
+		color: white;
+		a {
+			color: white;
+		}
 	}
 `;
 
