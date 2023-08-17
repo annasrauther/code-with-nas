@@ -50,7 +50,7 @@ const SinglePostsPage = () => {
             <h1
                 style={{
                     textAlign: 'center',
-                    fontSize: 'clamp(2.5rem, 3vw, 3.5rem)',
+                    fontSize: 'clamp(1.5rem, 3vw, 3.5rem)',
                     fontWeight: '900',
                 }}
                 className={`${headingStyles} title`}
