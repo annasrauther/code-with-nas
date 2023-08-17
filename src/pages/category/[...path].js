@@ -62,7 +62,7 @@ const CategoryPage = () => {
 				display: 'flex',
 				justifyContent: 'center',
 				gap: '10px',
-				borderBottom: '2px solid',
+				borderBottom: '2px solid rgba(0,0,0,.1)',
 				paddingBottom: '20px',
 			}}
 				className={headingStyles}

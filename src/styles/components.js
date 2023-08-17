@@ -26,11 +26,17 @@ export const backButtonStyles = css`
  * Styles for headings with term title.
  */
 export const headingStyles = css`
+  flex-direction: column;
+  align-items: center;
   font-size: clamp(2em,6vw + 1em,3em);
   font-weight: bold;
   color: #330;
   text-transform: uppercase;
   text-shadow: 1px 1px rgba(0,0,0,0.1);
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
 
   span.term-title {
     background: #330;
@@ -44,6 +50,7 @@ export const headingStyles = css`
     align-items: center;
     justify-content: center;
     padding: 0 0.5em;
+    font-size: 0.8em;
   }
 `;
 
@@ -55,9 +62,8 @@ export const singlePostStyles = css`
     text-align: center;
     display: flex;
     justify-content: center;
-    gap: 1em;
+    gap: 5px;
     flex-wrap: wrap;
-    padding-left: 1em;
     padding-bottom: 1em;
     margin: 1em 0;
     border-bottom: 2px solid rgba(0,0,0,0.1);
@@ -145,12 +151,22 @@ export const singlePostStyles = css`
       background: #b48a3b;
       color: white;
     }
+
+    .wp-block-code {
+      max-width: 100%;
+      overflow: scroll;
+    }
+    
     .wp-block-code code {
-      display: block;
-      padding: 1em 2em;
+      padding: 2em;
+      margin: 0;
       margin-bottom: 2em;
+      font-size: 1.2em;
       background: #330;
-      color: white;
+      color: #fff;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow: scroll;
     }
   }
 `;
