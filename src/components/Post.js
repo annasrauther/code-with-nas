@@ -19,6 +19,7 @@ const postStyles = css`
     border: 1px solid var(--color-border);
 	box-shadow: 0 0 5px var(--color-border);
     border-radius: var(--border-radius);
+    background: white;
     :hover {
         .recent-post__image {
             img {

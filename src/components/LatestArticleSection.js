@@ -4,7 +4,6 @@ import { css } from '@linaria/core';
 
 // Import components
 import PostList from '@/components/PostList';
-import Seperator from '@/components/Seperator';
 
 // Import styles
 import {
@@ -15,8 +14,10 @@ import {
 // Linaria styles
 const latestArticleSectionStyles = css`
     display: grid;
-    justifyContent: flex-start;
-    alignItems: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background: var(--color-secondary);
+    margin: 0 -0.5em;
 `;
 
 /**
@@ -34,11 +35,17 @@ const LatestArticleSection = ({ posts, loading }) => {
     }
 
     return (
-        <div className={latestArticleSectionStyles}>
-            <h2 style={{ textAlign: 'center' }} className={headingStyles}>
+        <div className={`${latestArticleSectionStyles} container`}>
+            <h2 style={{
+                textAlign: 'center',
+                background: 'white',
+                padding: '0.2em',
+                border: '1px solid var(--color-border)',
+                boxShadow: '0 0 5px var(--color-border)',
+                marginBottom: '0.5em',
+            }} className={headingStyles}>
                 Latest Articles
             </h2>
-            <Seperator size={1} />
             {/* Display list of latest posts */}
             <div className={latestArticleStyles}>
                 <PostList posts={posts} loading={loading} showCategory showTag />

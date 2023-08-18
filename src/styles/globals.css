@@ -2,8 +2,8 @@
 
 :root {
 	--color-primary: #a96e00;
-	--color-secondary: hsl(0, 0%, 95%);
-	/* --color-secondary: aliceblue; */
+	/* --color-secondary: hsl(0, 0%, 95%); */
+	--color-secondary: aliceblue;
 	--color-tertiary: #330;
 	--color-border: rgba(0, 0, 0, 0.1);
 	--breakpoint-mobile: 600px;

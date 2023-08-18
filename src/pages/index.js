@@ -20,7 +20,6 @@ import resolveBatch from '@/utils/promises';
 // Import components
 import Hero from '@/components/Hero';
 import LatestArticleSection from '@/components/LatestArticleSection';
-import Seperator from '@/components/Seperator';
 
 /**
  * Homepage component that displays code snippets and articles.
@@ -52,8 +51,6 @@ const Homepage = ({ terms, posts, loading }) => {
 
 			{/* Hero section */}
 			<Hero terms={terms}/>
-
-			<Seperator size={1}/>
 			
 			{/* Latest Articles section */}
 			<LatestArticleSection posts={posts} loading={loading} />

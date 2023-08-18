@@ -1,4 +1,5 @@
-// Import modules
+// Import necessary modules
+import React from 'react';
 import {
     usePosts,
     fetchHookData,
@@ -31,12 +32,15 @@ import {
  * @returns {JSX.Element} The JSX element representing the tag page.
  */
 const TagPage = () => {
+    // Fetch posts with the 'post_tag' taxonomy
     const { data, loading, error } = usePosts({ taxonomy: 'post_tag' });
 
+    // Display a loader while fetching data
     if (loading) {
         return <Loader />;
     }
 
+    // Display an error component if an error occurred during fetching
     if (error) {
         return <ErrorComponent message={error.message} />;
     }
@@ -48,6 +52,7 @@ const TagPage = () => {
             <Head>
                 <title>{pageTitle ? `${pageTitle} - Code with Nas` : 'Tags - Code with Nas'}</title>
             </Head>
+            {/* Display a link to go back to the tag or home page */}
             {pageTitle ? (
                 <Link className={backButtonStyles} href="/tag">
                     Go to Latest Posts
@@ -60,12 +65,16 @@ const TagPage = () => {
             <h1 className={cx(pageTitleStyles, headingStyles)}>
                 Tags: <span className="term-title">{pageTitle || 'Latest'}</span>
             </h1>
+            
+            {/* Display the list of posts */}
             <PostList
                 posts={data.posts}
                 loading={loading}
                 showCategory={true}
                 showTag={true}
             />
+            
+            {/* Display pagination if a specific tag is selected */}
             {pageTitle && <Pagination pageInfo={data.pageInfo} />}
         </section>
     );
@@ -79,6 +88,7 @@ const TagPage = () => {
  */
 export async function getServerSideProps(context) {
     try {
+        // Fetch data for posts and app settings in parallel
         const settledPromises = await resolveBatch([
             {
                 func: fetchHookData(usePosts.fetcher(), context, {
@@ -90,6 +100,7 @@ export async function getServerSideProps(context) {
 
         return addHookData(settledPromises, {});
     } catch (e) {
+        // Handle errors gracefully
         return handleError(e, context);
     }
 }
