@@ -15,11 +15,11 @@ const postStyles = css`
     justify-content: flex-start;
     align-items: center;
     gap: 1em;
-    background: var(--color-secondary);
     padding: 1em;
     border: 1px solid var(--color-border);
 	box-shadow: 0 0 5px var(--color-border);
     border-radius: var(--border-radius);
+    background: white;
     :hover {
         .recent-post__image {
             img {
@@ -93,18 +93,16 @@ const postStyles = css`
     .recent-post__category {
         text-align: center;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        gap: 1em;
+        gap: 5px;
         flex-wrap: wrap;
+        width: 100%;
         
         h4 {
-            letter-spacing: 0.5px;
+            letter-spacing: 0.1px;
             font-weight: 400;
-            background: white;
-            :hover {
-                background: var(--color-tertiary);
-            }
+            font-size: 0.8em;
         }
     }
 
