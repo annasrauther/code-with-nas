@@ -1,23 +1,32 @@
+// Import dependencies
+import PropTypes from 'prop-types';
 import { styled } from '@linaria/react';
 import { useRouter } from 'next/router';
-import PropTypes from 'prop-types';
-import Link from './Link';
 
+// Import components
+import Link from '@/components/Link';
+
+/**
+ * Styled component for the pagination container.
+ */
 const PaginationContainer = styled.ul`
 	display: flex;
 	width: 100%;
 	justify-content: center;
 	gap: 1em;
-	border-top: 2px solid rgba(0,0,0,0.1);
+	border-top: 2px solid rgba(0, 0, 0, 0.1);
 	padding-top: 0.5em;
 `;
 
+/**
+ * Styled component for an individual pagination item.
+ */
 const PaginationItem = styled.li`
 	background: white;
 	padding: 5px 10px;
 	border-radius: 3px;
-	border: 1px solid rgba(0,0,0,0.1);
-	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 	transition: all 0.3s ease;
 	list-style: none;
 	a {
@@ -33,6 +42,16 @@ const PaginationItem = styled.li`
 	}
 `;
 
+/**
+ * Pagination component to navigate between pages.
+ *
+ * @param {Object} props - Component props.
+ * @param {Object} props.pageInfo - Pagination information.
+ * @param {number} props.pageInfo.page - Current page number.
+ * @param {number} props.pageInfo.totalItems - Total number of items.
+ * @param {number} props.pageInfo.totalPages - Total number of pages.
+ * @returns {JSX.Element|null} - Pagination JSX element or null if only one page.
+ */
 export const Pagination = ({ pageInfo }) => {
 	const { asPath } = useRouter();
 	const path = !asPath.includes('/page') ? `${asPath}/page/1` : asPath;
@@ -84,10 +103,25 @@ export const Pagination = ({ pageInfo }) => {
 	);
 };
 
+// Define PropTypes for the Pagination component
 Pagination.propTypes = {
+	/**
+	 * Pagination information.
+	 */
 	pageInfo: PropTypes.shape({
-		page: PropTypes.number,
-		totalItems: PropTypes.number,
-		totalPages: PropTypes.number,
+		/**
+		 * Current page number.
+		 */
+		page: PropTypes.number.isRequired,
+		/**
+		 * Total number of items.
+		 */
+		totalItems: PropTypes.number.isRequired,
+		/**
+		 * Total number of pages.
+		 */
+		totalPages: PropTypes.number.isRequired,
 	}).isRequired,
 };
+
+export default Pagination;

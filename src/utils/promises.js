@@ -8,14 +8,14 @@
  */
 
 /**
- * The fetchBatch function receives an array of PromiseObject and
+ * The resolveBatch function receives an array of PromiseObject and
  * optionally skips throwing exceptions for the ones passed with `throw: false`.
  *
  * @param {FetchBashPromises} promises Array of PromiseObject to be resolved.
  *
  * @returns {PromiseFunc} The resolved promises.
  */
-export async function resolveBatch(promises) {
+const resolveBatch = async (promises) => {
 	const promisesArray = Array.isArray(promises) ? promises : [promises];
 	const promisesArrayFunc = promisesArray.map(({ func }) => func);
 	const shouldThrowPromisesArray = promisesArray.map(({ throw: shouldThrow }) =>
@@ -35,3 +35,5 @@ export async function resolveBatch(promises) {
 	const fulfilledPromises = settledPromises.filter(({ status }) => status === 'fulfilled');
 	return fulfilledPromises.map(({ value }) => value);
 }
+
+export default resolveBatch;

@@ -9,12 +9,13 @@ import {
 } from '@headstartwp/next';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 // Import params
 import { singleParams } from '@/params';
 
 // Import utils
-import { resolveBatch } from '@/utils/promises';
+import resolveBatch from '@/utils/promises';
 
 // Import components
 import Hero from '@/components/Hero';
@@ -31,10 +32,22 @@ import Seperator from '@/components/Seperator';
  * @returns {JSX.Element} - Homepage JSX element.
  */
 const Homepage = ({ terms, posts, loading }) => {
+	const router = useRouter(); // Get the router instance
+
+	const siteTitle = 'Code with Nas';
+	const siteDescription = 'Explore code snippets and articles by Nas.';
+	const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || '';
+	
 	return (
 		<div style={{ display: 'grid'}}>
 			<Head>
-				<title>Code with Nas - Homepage</title>
+				<title>{siteTitle} - Homepage</title>
+				<meta name="description" content={siteDescription} />
+				<meta property="og:title" content={`${siteTitle} - Homepage`} />
+				<meta property="og:description" content={siteDescription} />
+				<meta property="og:type" content="website" />
+				<meta property="og:url" content={`${siteUrl}${router.asPath}`} />
+				<link rel="canonical" href={`${siteUrl}${router.asPath}`} />
 			</Head>
 
 			{/* Hero section */}

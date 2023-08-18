@@ -82,6 +82,8 @@ export const singlePostStyles = css`
     background: white;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
     border: 1px solid rgba(0,0,0,0.1);
+    max-width: 700px;
+    margin: 0 auto;
 
     h1,
     h2,
@@ -195,4 +197,19 @@ export const heroStyles = css`
     @media (min-width: 768px) {
       grid-template-columns: 2fr 1fr;
     }
+`;
+
+export const pageTitleStyles = css`
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  border-bottom: 2px solid rgba(0,0,0,.1);
+  padding-bottom: 20px;
+`;
+
+export const pageSectionStyles = css`
+  display: grid;
+  justifyContent: flex-start;
+  align-items: flex-start;
+  gap: 2em;
 `;

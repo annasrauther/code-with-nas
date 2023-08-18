@@ -1,9 +1,14 @@
-import Link from "./Link";
+// Import dependencies
 import PropTypes from 'prop-types';
 import Image from 'next/image';
-import Badge from "./Badge";
 import { css } from '@linaria/core';
+import formatDate from '@/utils/formatDate';
 
+// Import components
+import Link from '@/components/Link';
+import Badge from '@/components/Badge';
+
+// Styles for the post component
 const postStyles = css`
     display: flex;
     flex-direction: column;
@@ -77,62 +82,86 @@ const postStyles = css`
     }
 `;
 
+/**
+ * Component to display a single post.
+ *
+ * @param {Object} props - Component props.
+ * @param {Object} props.post - Post data.
+ * @param {boolean} props.showCategory - Whether to show category.
+ * @param {boolean} props.showTag - Whether to show tag.
+ * @returns {JSX.Element} - Post JSX element.
+ */
 const Post = ({ post, showCategory, showTag }) => {
     return (
-		<div className={postStyles}>
+        <div className={postStyles}>
             <div className="recent-post__image">
-                {
-                    post._embedded['wp:featuredmedia'] ? (
-                        <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
-                    ): <Image src="/post-placeholder.avif" alt={post.title.rendered} width={300} height={300} />
-                }
-			</div>
-			<div className="recent-post__content">				
-				<div className="recent-post__category">
-                    {
-                        showCategory && post._embedded['wp:term'][0] && post._embedded['wp:term'][0].length
-                        ? (
-                            <Badge term={post._embedded['wp:term'][0][0]} type={'category'} />
-                        ): null
-                    }
-					{
-						showTag && post._embedded['wp:term'][1] && post._embedded['wp:term'][1].length
-                        ? post._embedded['wp:term'][1].map((term) => (
-							<Badge key={term.id} term={term} type={'tag'} />
-						)): null
-					}
-				</div>
-				<Link href={post.link}>
-					<h3 className="recent-post__content-title" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-				</Link>
-                {
-                    post._embedded.author && post._embedded.author.length ? (
-                        <div className="recent-post__author">
-                            <h4>By {post._embedded.author[0].name}</h4>
-                        </div>
-                    ): null
-                }
-                {
-                    post.date ? (
-                        <div className="recent-post__date">
-                            {/* <h4>{new Date(post.date).toLocaleDateString()}</h4> */}
-                        </div>
-                    ): null
-                }
-                {
-                    post.excerpt.rendered ? (
-                        <div className="recent-post__description" dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
-                    ): null
-                }
-			</div>
-		</div>
-	);
+                {post._embedded['wp:featuredmedia'] ? (
+                    <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
+                ) : (
+                    <Image src="/post-placeholder.avif" alt={post.title.rendered} width={300} height={300} />
+                )}
+            </div>
+            <div className="recent-post__content">
+                <div className="recent-post__category">
+                    {showCategory && post._embedded['wp:term'][0] && post._embedded['wp:term'][0].length ? (
+                        <Badge term={post._embedded['wp:term'][0][0]} type={'category'} />
+                    ) : null}
+                    {showTag &&
+                        post._embedded['wp:term'][1] &&
+                        post._embedded['wp:term'][1].length ? (
+                            post._embedded['wp:term'][1].map((term) => (
+                                <Badge key={term.id} term={term} type={'tag'} />
+                            ))
+                        ) : null}
+                </div>
+                <Link href={post.link}>
+                    <h3
+                        className="recent-post__content-title"
+                        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                    />
+                </Link>
+                {post._embedded.author && post._embedded.author.length ? (
+                    <div className="recent-post__author">
+                        <h4>By {post._embedded.author[0].name}</h4>
+                    </div>
+                ) : null}
+                {post.date ? (
+                    <div className="recent-post__date">{formatDate(post.date)}</div>
+                ) : null}
+                {post.excerpt.rendered ? (
+                    <div
+                        className="recent-post__description"
+                        dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                    />
+                ) : null}
+            </div>
+        </div>
+    );
 };
 
 Post.propTypes = {
-	post: PropTypes.shape({ title: PropTypes.shape({ rendered: PropTypes.string }) }).isRequired,
+    /**
+     * Post data containing title and other details.
+     */
+    post: PropTypes.shape({
+        title: PropTypes.shape({ rendered: PropTypes.string }),
+        _embedded: PropTypes.shape({
+            'wp:featuredmedia': PropTypes.array,
+            'wp:term': PropTypes.array,
+            author: PropTypes.array,
+        }),
+        link: PropTypes.string,
+        date: PropTypes.string,
+        excerpt: PropTypes.shape({ rendered: PropTypes.string }),
+    }).isRequired,
+    /**
+     * Whether to show the category.
+     */
     showCategory: PropTypes.bool,
-    showTag: PropTypes.bool
+    /**
+     * Whether to show the tag.
+     */
+    showTag: PropTypes.bool,
 };
 
 export default Post;

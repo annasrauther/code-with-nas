@@ -1,4 +1,5 @@
 // Import modules
+import React from 'react';
 import {
 	usePosts,
 	fetchHookData,
@@ -7,16 +8,19 @@ import {
 	useAppSettings,
 	useTerms,
 } from '@headstartwp/next';
-import { resolveBatch } from '@/utils/promises';
+import resolveBatch from '@/utils/promises';
 import Link from 'next/link';
 import Head from 'next/head';
+import { cx } from '@linaria/core';
 
 // Import components
 import PostList from '@/components/PostList';
 import { Pagination } from '@/components/Pagination';
+import Loader from '@/components/Loader';
+import ErrorComponent from '@/components/ErrorComponent';
 
 // Import styles
-import { headingStyles, backButtonStyles } from '@/styles/components';
+import { headingStyles, backButtonStyles, pageTitleStyles, pageSectionStyles } from '@/styles/components';
 
 /**
  * Renders a page displaying posts in a specific category.
@@ -27,50 +31,38 @@ const CategoryPage = () => {
 	const {
 		data,
 		loading,
+		error,
 	} = usePosts({ taxonomy: 'category' });
 
-	const {
-		data: { terms },
-		error: termsError,
-		loading: termsLoading,
-	} = useTerms({ taxonomy: 'post_tag', _fields: ['name', 'id', 'link', 'description'] });
-
-	if (termsLoading) {
-		return <p>Loading...</p>;
+	if (loading) {
+		return <Loader />;
 	}
 
-	if (termsError) {
-		return <p>Error loading tags: {termsError.message}</p>;
+	if (error) {
+		return <ErrorComponent message={error.message} />;
 	}
 
 	const pageTitle = data.queriedObject?.term?.name;
 
 	return (
-		<section style={{
-			display: 'grid',
-			justifyContent: 'flex-start',
-			alignItems: 'flex-start',
-			gap: '2em',
-		}}>
+		<section className={pageSectionStyles}>
 			<Head>
-				<title>{ data.queriedObject?.term?.name || 'Categories'}</title>
+				<title>{pageTitle ? `${pageTitle} - Code with Nas` : 'Categories - Code with Nas'}</title>
 			</Head>
-			{
-				data.queriedObject?.term?.name ? <Link className={backButtonStyles} href="/category">See All Categories</Link> : null
-			}
-			<h1 style={{
-				display: 'flex',
-				justifyContent: 'center',
-				gap: '10px',
-				borderBottom: '2px solid rgba(0,0,0,.1)',
-				paddingBottom: '20px',
-			}}
-				className={headingStyles}
-			>
-				Category: <span className="term-title">{pageTitle}</span>
+			{pageTitle ? (
+				<Link className={backButtonStyles} href="/category">
+					See All Categories
+				</Link>
+			) : (
+				<Link className={backButtonStyles} href="/">
+					Home
+				</Link>
+			)}
+			<h1 className={cx(pageTitleStyles, headingStyles)}>
+				Category: <span className="term-title">{pageTitle || 'Latest'}</span>
 			</h1>
-			<PostList posts={data.posts} loading={loading} showCategory={false} showTag={true} />
-			<Pagination pageInfo={data.pageInfo} />
+			<PostList posts={data.posts} loading={loading} showCategory={!pageTitle} showTag={true} />
+			{pageTitle && <Pagination pageInfo={data.pageInfo} />}
 		</section>
 	);
 };
@@ -101,13 +93,6 @@ export async function getServerSideProps(context) {
 			{ func: fetchHookData(useAppSettings.fetcher(), context), throw: false },
 		]);
 
-		/**
-		 * It is also possible to get the queried object on the server, this is useful if you need to conditionally fetch data
-		 * server side based on queriedObject
-		 *
-		 * const [posts] = settledPromises;
-		 * console.log(posts.data.queriedObject.term.slug);
-		 */
 		const [posts] = settledPromises;
 		return addHookData([posts], {});
 	} catch (e) {
