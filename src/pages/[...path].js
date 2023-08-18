@@ -53,8 +53,8 @@ const SinglePostsPage = () => {
             />
             <h1 className={`${headingStyles} post-title`} dangerouslySetInnerHTML={{ __html: data.post.title.rendered }} />
             <div className="post-meta">
-                <p className="post-author">By <span>{data.post._embedded.author[0].name}</span>,</p>
                 <p className="post-date"> {formatDate(data.post.date)}</p>
+                <p className="post-author">By <span>{data.post._embedded.author[0].name}</span></p>
             </div>
             <div className="post-category">
                 <Badge term={data.post._embedded['wp:term'][0][0]} type={'category'} />

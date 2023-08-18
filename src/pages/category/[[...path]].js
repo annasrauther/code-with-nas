@@ -51,7 +51,7 @@ const CategoryPage = () => {
 			</Head>
 			{pageTitle ? (
 				<Link className={backButtonStyles} href="/category">
-					See All Categories
+					Go to Latest Posts
 				</Link>
 			) : (
 				<Link className={backButtonStyles} href="/">

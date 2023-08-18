@@ -27,7 +27,7 @@ export const backButtonStyles = css`
 export const headingStyles = css`
   flex-direction: column;
   align-items: center;
-  font-size: clamp(2em,6vw + 1em,3em);
+  font-size: clamp(2em, 5vw + 1em, 3em);
   font-weight: bold;
   color: var(--color-tertiary);
   font-family: var(--font-family-secondary);
@@ -99,27 +99,33 @@ export const singlePostStyles = css`
 
   .post-meta {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 1em;
     text-align: center;
     font-weight: lighter;
+    font-size: 0.9em;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+
   }
 
   .post-author {
     span {
-      font-weight: 900;
       text-transform: uppercase;
     }
   }
 
   .post-content {
     padding: 2em 1.5em;
-    background: var(--color-secondary);
     box-shadow: 0 0 5px var(--color-border);
     border: 1px solid var(--color-border);
     max-width: 700px;
     margin: 0 auto;
+    border-radius: var(--border-radius);
 
     h1,
     h2,
@@ -130,8 +136,7 @@ export const singlePostStyles = css`
       font-weight: 600;
       font-family: var(--font-family-secondary);
       margin: 1em 0;
-      border-bottom: 1px solid gray;
-      padding-left: 0.3em;
+      border-bottom: 1px solid var(--color-border);
       padding-bottom: 0.25em;
     }
     h1 {
@@ -173,6 +178,17 @@ export const singlePostStyles = css`
       margin-bottom: 1em;
     }
 
+    a {
+      color: var(--color-primary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-primary);
+      transition: all 0.2s ease;
+      :hover {
+        color: var(--color-tertiary);
+        border-bottom: 1px solid var(--color-tertiary);
+      }
+    }
+
     figure {
       margin: 1em 0;
       img {
@@ -181,12 +197,11 @@ export const singlePostStyles = css`
       }
     }
     code {
+      font-family: var(--font-family-primary);
       display: inline-block;
-      font-weight: 900;
-      padding: 0.125rem 0.375rem;
-      border-radius: 3px;
-      border: 1px solid var(--color-border);
-      margin: 0 2px;
+      padding: 0.2em 0.4em;
+      border-radius: 5px;
+      margin: 2px;
       background: var(--color-tertiary);
       color: var(--color-secondary);
     }
@@ -194,20 +209,17 @@ export const singlePostStyles = css`
     .wp-block-code {
       max-width: 100%;
       overflow: scroll;
+
+      code {
+        padding: 1.5em;
+        display: block;
+        margin: 0;
+        margin-bottom: 1em;
+        background: var(--color-tertiary);
+        color: var(--color-secondary);
+        overflow: scroll;
+      }
     }
-    
-    .wp-block-code code {
-      padding: 2em;
-      margin: 0;
-      margin-bottom: 2em;
-      font-size: 1.2em;
-      background: var(--color-tertiary);
-      color: var(--color-secondary);
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      overflow: scroll;
-    }
-  }
 `;
 
 export const latestArticleStyles = css`
@@ -231,7 +243,7 @@ export const heroStyles = css`
     gap: 2em;
     grid-template-columns: 1fr;
 
-    @media (min-width: var(--breakpoint-tablet)) {
+    @media (min-width: 768px) {
       grid-template-columns: 2fr 1fr;
     }
 `;

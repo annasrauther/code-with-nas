@@ -1,16 +1,16 @@
 /* Variables */
 
 :root {
-	--color-primary: #b48a3b;
-	/* --color-secondary: hsl(0, 0%, 95%); */
-	--color-secondary: aliceblue;
+	--color-primary: #a96e00;
+	--color-secondary: hsl(0, 0%, 95%);
+	/* --color-secondary: aliceblue; */
 	--color-tertiary: #330;
-	--color-border: rgba(0, 0, 0, 0.2);
+	--color-border: rgba(0, 0, 0, 0.1);
 	--breakpoint-mobile: 600px;
 	--breakpoint-tablet: 768px;
 	--breakpoint-desktop: 1200px;
 	--breakpoint-hd: 1800px;
-	--border-radius: 5px;
+	--border-radius: 3px;
 	--font-family-primary: 'Nunito', sans-serif;
 	--font-family-secondary: 'Libre Baskerville', serif;
 
@@ -58,13 +58,6 @@ html, body {
 a {
 	text-decoration: none;
 	color: var(--color-tertiary);
-}
-
-/* Hover, active, and focus styles for links */
-a:hover,
-a:active,
-a:focus {
-	color: var(--color-primary);
 }
 
 /* Responsive styling for images */

@@ -11,7 +11,6 @@ import Link from '@/components/Link';
  */
 const PaginationContainer = styled.ul`
 	display: flex;
-	width: 100%;
 	justify-content: center;
 	gap: 1em;
 	border-top: 1px solid var(--color-border);
@@ -23,7 +22,6 @@ const PaginationContainer = styled.ul`
  */
 const PaginationItem = styled.li`
 	background: var(--color-secondary);
-	padding: 5px 10px;
 	border-radius: var(--border-radius);
 	border: 1px solid var(--color-border);
 	box-shadow: 0 0 5px var(--color-border);
@@ -32,6 +30,8 @@ const PaginationItem = styled.li`
 	a {
 		color: black;
 		border: none;
+		padding: 5px 10px;
+		display: inline-block;
 	}
 	:hover {
 		background: var(--color-tertiary);
@@ -86,7 +86,9 @@ export const Pagination = ({ pageInfo }) => {
 							{page + 1}
 						</Link>
 					) : (
-						page + 1
+						<a style={{
+							cursor: 'not-allowed',
+						}}>{page + 1}</a>
 					)}
 				</PaginationItem>
 			))}

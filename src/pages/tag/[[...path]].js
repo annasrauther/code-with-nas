@@ -50,7 +50,7 @@ const TagPage = () => {
             </Head>
             {pageTitle ? (
                 <Link className={backButtonStyles} href="/tag">
-                    See All Tags
+                    Go to Latest Posts
                 </Link>
             ) : (
                 <Link className={backButtonStyles} href="/">
