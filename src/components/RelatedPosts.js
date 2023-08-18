@@ -16,7 +16,7 @@ const relatedArticleSectionStyles = css`
     justify-content: flex-start;
     align-items: flex-start;
     background: var(--color-secondary);
-    margin: 0 -0.5em;
+    margin: 3em -0.5em 0;
 `;
 
 /**
@@ -25,7 +25,7 @@ const relatedArticleSectionStyles = css`
  * @param {Object} props - The component props.
  * @returns {JSX.Element} The rendered JSX element.
  */
-const RelatedPosts = ({ relatedPosts }) => {
+const RelatedPosts = ({ relatedPosts, loading }) => {
     return (
         <div className={`${relatedArticleSectionStyles} container`}>
             {/* Heading for the related articles section */}
@@ -40,7 +40,7 @@ const RelatedPosts = ({ relatedPosts }) => {
                 Related Articles
             </h2>
             {/* Display the list of related articles */}
-            <PostList posts={relatedPosts} showCategory={true} showTag={true} />
+            <PostList posts={relatedPosts} loading={loading} showCategory showTag />
         </div>
     );
 };
@@ -56,6 +56,7 @@ const RelatedPosts = ({ relatedPosts }) => {
  * @property {boolean} loading - Loading state.
  * @property {boolean} showCategory - Whether to show the post category.
  * @property {boolean} showTag - Whether to show the post tag.
+ * @property {boolean} loading - Loading state.
  */ 
 RelatedPosts.propTypes = {
     relatedPosts: PropTypes.arrayOf(
@@ -67,6 +68,7 @@ RelatedPosts.propTypes = {
             }).isRequired,
         })
     ).isRequired,
+    loading: PropTypes.bool.isRequired,
 };
 
 export default RelatedPosts;

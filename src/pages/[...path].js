@@ -96,7 +96,7 @@ const SinglePostsPage = () => {
             </div>
 
             {/* Display related posts */}
-            <RelatedPosts relatedPosts={relatedPosts.posts} />
+            <RelatedPosts relatedPosts={relatedPosts.posts} loading={loading} />
         </div>
     );
 };

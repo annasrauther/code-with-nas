@@ -1,123 +1,121 @@
-// Import necessary modules
-import { usePost, usePosts, fetchHookData, addHookData, handleError } from '@headstartwp/next';
-import { BlocksRenderer } from '@headstartwp/core/react';
+// Import dependencies
+import {
+	usePosts,
+	fetchHookData,
+	addHookData,
+	handleError,
+	useAppSettings,
+	useTerms,
+} from '@headstartwp/next';
+import resolveBatch from '@/utils/promises';
+import Link from 'next/link';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
-import formatDate from '@/utils/formatDate';
+import { cx } from '@linaria/core';
 
 // Import components
-import Badge from '@/components/Badge';
+import PostList from '@/components/PostList';
+import { Pagination } from '@/components/Pagination';
 import Loader from '@/components/Loader';
 import ErrorComponent from '@/components/ErrorComponent';
-import RelatedPosts from '@/components/RelatedPosts';
 
 // Import styles
-import { singlePostStyles } from '@/styles/components';
-import { headingStyles } from '@/styles/components';
+import {
+	headingStyles,
+	backButtonStyles,
+	pageTitleStyles,
+	pageSectionStyles,
+} from '@/styles/components';
 
 /**
- * Renders a single post page.
- * @component
- * @returns {JSX.Element} Rendered single post page.
+ * Renders a page displaying posts in a specific category.
+ *
+ * @returns {JSX.Element} The JSX element representing the category page.
  */
-const SinglePostsPage = () => {
-    const router = useRouter();
-    const params = { postType: ['post'] };
-    
-    // Fetch main post data using usePost hook
-    const { loading, error, data } = usePost(params);
-    
-    // Extract category information from the post data
-    const category = data.post._embedded['wp:term'][0][0];
+const CategoryPage = () => {
+	const {
+		data,
+		loading,
+		error,
+	} = usePosts({ taxonomy: 'category', per_page: 12 });
 
-    // Fetch related posts based on the category
-    const {
-        data: relatedPosts,
-        loading: relatedPostsLoading,
-        error: relatedPostsError,
-    } = usePosts({ taxonomy: category.id, per_page: 4 });
+	// Display loading state while fetching data
+	if (loading) {
+		return <Loader />;
+	}
 
-    // Display loaders if data is still loading
-    if (loading || relatedPostsLoading) {
-        return <Loader />;
-    }
+	// Display error message if data fetching fails
+	if (error) {
+		return <ErrorComponent message={error.message} />;
+	}
 
-    // Display an error component if any errors occurred during fetching
-    if (error || relatedPostsError) {
-        return <ErrorComponent message={error.message} />;
-    }
+	const pageTitle = data.queriedObject?.term?.name;
 
-    // Determine the post background image
-    const postBackgroundImage = data.post._embedded['wp:featuredmedia']?.length > 0
-        ? data.post._embedded['wp:featuredmedia'][0].source_url
-        : '/post-placeholder.avif';
-
-    return (
-        <div className={singlePostStyles}>
-            {/* Head section for metadata */}
-            <Head>
-                <title>{`${data.post.title.rendered} - Code with Nas`}</title>
-                <meta name="description" content={data.post.excerpt.rendered} />
-                <meta property="og:title" content={data.post.title.rendered} />
-                <meta property="og:description" content={data.post.excerpt.rendered} />
-                <meta property="og:image" content={postBackgroundImage} />
-                <meta property="og:type" content="article" />
-                <meta property="article:published_time" content={data.post.date} />
-                <link rel="canonical" href={`${process.env.NEXT_PUBLIC_SITE_URL}${router.asPath}`} />
-            </Head>
-            
-            {/* Post thumbnail */}
-            <div className="post-thumbnail"
-                style={{
-                    backgroundImage: `url(${postBackgroundImage})`
-                }}
-            />
-
-            {/* Post title */}
-            <h1 className={`${headingStyles} post-title`} dangerouslySetInnerHTML={{ __html: data.post.title.rendered }} />
-            
-            {/* Post metadata */}
-            <div className="post-meta">
-                <p className="post-date"> {formatDate(data.post.date)}</p>
-                <p className="post-author">By <span>{data.post._embedded.author[0].name}</span></p>
-            </div>
-            
-            {/* Post category and tags */}
-            <div className="post-category">
-                <Badge term={category} type={'category'} />
-                {data.post._embedded['wp:term'][1].map((term) => (
-                    <Badge key={term.id} term={term} type={'tag'} />
-                ))}
-            </div>
-            
-            {/* Post content */}
-            <div className="post-content">
-                <BlocksRenderer html={data.post.content.rendered} />
-            </div>
-
-            {/* Display related posts */}
-            <RelatedPosts relatedPosts={relatedPosts.posts} />
-        </div>
-    );
+	return (
+		<section className={pageSectionStyles}>
+			<Head>
+				<title>
+					{pageTitle
+						? `${pageTitle} - Code with Nas`
+						: 'Categories - Code with Nas'}
+				</title>
+			</Head>
+			{pageTitle ? (
+				<Link className={backButtonStyles} href="/category">
+					Go to Latest Posts
+				</Link>
+			) : (
+				<Link className={backButtonStyles} href="/">
+					Home
+				</Link>
+			)}
+			<h1 className={cx(pageTitleStyles, headingStyles)}>
+				Category: <span className="term-title">{pageTitle || 'Latest'}</span>
+			</h1>
+			<PostList
+				posts={data.posts}
+				loading={loading}
+				showCategory={!pageTitle}
+				showTag={true}
+			/>
+			{pageTitle && <Pagination pageInfo={data.pageInfo} />}
+		</section>
+	);
 };
 
 /**
- * Server-side data fetching.
- * @param {Object} context - The context object.
- * @returns {Object} Props for the component.
+ * Fetches data for the category page.
+ *
+ * @param {object} context - The context object containing request parameters.
+ * @returns {object} An object containing fetched data for the category page.
  */
 export async function getServerSideProps(context) {
-    try {
-        // Fetch main post data
-        const postParams = { postType: ['post'] };
-        const postData = await fetchHookData(usePost.fetcher(), context, { params: postParams });
+	try {
+		// Fetch data in parallel using resolveBatch
+		const settledPromises = await resolveBatch([
+			{
+				func: fetchHookData(usePosts.fetcher(), context, {
+					params: {
+						taxonomy: 'category',
+					},
+				}),
+			},
+			{
+				func: fetchHookData(useTerms.fetcher(), context, {
+					params: {
+						taxonomy: 'post_tag',
+					},
+				}),
+			},
+			{ func: fetchHookData(useAppSettings.fetcher(), context), throw: false },
+		]);
 
-        // Add fetched post data as props
-        return addHookData([postData], {});
-    } catch (e) {
-        // Handle errors gracefully
-        return handleError(e, context);
-    }
+		const [posts] = settledPromises;
+		// Add fetched data to the hook data
+		return addHookData([posts], {});
+	} catch (e) {
+		// Handle errors gracefully
+		return handleError(e, context);
+	}
 }
 
-export default SinglePostsPage;
+export default CategoryPage;
