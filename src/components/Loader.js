@@ -14,12 +14,12 @@ const Loader = () => {
         align-items: center;
         width: 100%;
         height: 400px;
-        background-color: #f0f0f0;
+        background-color: var(--color-secondary);
     `;
 
     const loader = css`
-        border: 4px solid rgba(0, 0, 0, 0.1);
-        border-left-color: #333;
+        border: 4px solid var(--color-border);
+        border-left-color: var(--color-tertiary);
         animation: spin 1s linear infinite;
         width: 40px;
         height: 40px;

@@ -4,26 +4,24 @@ import Link from '@/components/Link';
 
 // Linaria CSS styling for the badge
 const badgeStyles = css`
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--color-secondary);
+    border: 1px solid var(--color-border);
     display: inline-block;
-    font-size: 12px;
+    font-size: 1em;
     font-weight: 400;
     letter-spacing: 1px;
-    line-height: 14px;
     padding: 9px 15px 8px;
     position: relative;
-    text-decoration: none;
     text-transform: uppercase;
     margin: 0;
-    color: #330;
-    border-radius: 3px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    color: var(--color-tertiary);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 5px var(--color-border);
     transition: all 0.2s ease;
 
     :hover {
-        background: #330;
-        color: #fff;
+        background: var(--color-tertiary);
+        color: var(--color-secondary);
     }
 `;
 

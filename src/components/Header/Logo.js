@@ -6,7 +6,6 @@ import { css } from '@linaria/core';
 // Linaria CSS styling for the logo
 const logoStyles = css`
     text-align: center;
-    border: none;
 `;
 
 /**

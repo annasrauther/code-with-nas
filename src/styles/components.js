@@ -6,19 +6,18 @@ import { css } from '@linaria/core';
 export const backButtonStyles = css`
   text-align: center;
   padding: 0.25em;
-  border: 1px solid #330;
+  border: 1px solid var(--color-border);
   font-size: 1.5em;
   font-weight: 200;
   text-transform: uppercase;
   letter-spacing: 4px;
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  border-radius: 5px;
+  background: var(--color-secondary);
+  box-shadow: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
   transition: all 0.2s ease;
   :hover {
-    background: #330;
-    color: #fff;
+    background: var(--color-tertiary);
+    color: var(--color-secondary);
   }
 `;
 
@@ -30,19 +29,19 @@ export const headingStyles = css`
   align-items: center;
   font-size: clamp(2em,6vw + 1em,3em);
   font-weight: bold;
-  color: #330;
+  color: var(--color-tertiary);
+  font-family: var(--font-family-secondary);
   text-transform: uppercase;
-  text-shadow: 1px 1px rgba(0,0,0,0.1);
 
-  @media (min-width: 768px) {
+  @media (min-width: var(--breakpoint-tablet)) {
     flex-direction: row;
   }
 
   span.term-title {
-    background: #330;
-    color: white;
-    border: 1px solid #330;
-    border-radius: 5px;
+    background: var(--color-tertiary);
+    color: var(--color-secondary);
+    border: 1px solid var(--color-tertiary);
+    border-radius: var(--border-radius);
     text-transform: uppercase;
     font-weight: 900;
     display: flex;
@@ -66,7 +65,7 @@ export const singlePostStyles = css`
     flex-wrap: wrap;
     padding-bottom: 1em;
     margin: 1em 0;
-    border-bottom: 2px solid rgba(0,0,0,0.1);
+    border-bottom: 1px solid var(--color-border);
     a {
       border: none;
     }
@@ -77,11 +76,48 @@ export const singlePostStyles = css`
     }
   }
 
+  .post-title {
+    text-align: center;
+    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 0.5em;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5em;
+    font-family: var(--font-family-secondary);
+  }
+  
+  .post-thumbnail {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    height: clamp(20vh, 20vw, 50vh);
+    margin-bottom: 1em;
+    box-shadow: 0 0 5px var(--color-border);
+    border-radius: var(--border-radius);
+  }
+
+  .post-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    font-weight: lighter;
+  }
+
+  .post-author {
+    span {
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+  }
+
   .post-content {
     padding: 2em 1.5em;
-    background: white;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0,0,0,0.1);
+    background: var(--color-secondary);
+    box-shadow: 0 0 5px var(--color-border);
+    border: 1px solid var(--color-border);
     max-width: 700px;
     margin: 0 auto;
 
@@ -92,6 +128,7 @@ export const singlePostStyles = css`
     h5,
     h6 {
       font-weight: 600;
+      font-family: var(--font-family-secondary);
       margin: 1em 0;
       border-bottom: 1px solid gray;
       padding-left: 0.3em;
@@ -148,10 +185,10 @@ export const singlePostStyles = css`
       font-weight: 900;
       padding: 0.125rem 0.375rem;
       border-radius: 3px;
-      border: 1px solid;
+      border: 1px solid var(--color-border);
       margin: 0 2px;
-      background: #b48a3b;
-      color: white;
+      background: var(--color-tertiary);
+      color: var(--color-secondary);
     }
 
     .wp-block-code {
@@ -164,8 +201,8 @@ export const singlePostStyles = css`
       margin: 0;
       margin-bottom: 2em;
       font-size: 1.2em;
-      background: #330;
-      color: #fff;
+      background: var(--color-tertiary);
+      color: var(--color-secondary);
       white-space: pre-wrap;
       word-wrap: break-word;
       overflow: scroll;
@@ -194,16 +231,17 @@ export const heroStyles = css`
     gap: 2em;
     grid-template-columns: 1fr;
 
-    @media (min-width: 768px) {
+    @media (min-width: var(--breakpoint-tablet)) {
       grid-template-columns: 2fr 1fr;
     }
 `;
 
 export const pageTitleStyles = css`
   display: flex;
+  font-family: var(--font-family-secondary);
   justify-content: center;
   gap: 10px;
-  border-bottom: 2px solid rgba(0,0,0,.1);
+  border-bottom: 1px solid var(--color-border);
   padding-bottom: 20px;
 `;
 

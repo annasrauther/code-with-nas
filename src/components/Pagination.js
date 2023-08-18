@@ -14,7 +14,7 @@ const PaginationContainer = styled.ul`
 	width: 100%;
 	justify-content: center;
 	gap: 1em;
-	border-top: 2px solid rgba(0, 0, 0, 0.1);
+	border-top: 1px solid var(--color-border);
 	padding-top: 0.5em;
 `;
 
@@ -22,22 +22,22 @@ const PaginationContainer = styled.ul`
  * Styled component for an individual pagination item.
  */
 const PaginationItem = styled.li`
-	background: white;
+	background: var(--color-secondary);
 	padding: 5px 10px;
-	border-radius: 3px;
-	border: 1px solid rgba(0, 0, 0, 0.1);
-	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-	transition: all 0.3s ease;
+	border-radius: var(--border-radius);
+	border: 1px solid var(--color-border);
+	box-shadow: 0 0 5px var(--color-border);
+	transition: all 0.2s ease;
 	list-style: none;
 	a {
 		color: black;
 		border: none;
 	}
 	:hover {
-		background: #330;
-		color: white;
+		background: var(--color-tertiary);
+		color: var(--color-secondary);
 		a {
-			color: white;
+			color: var(--color-secondary);
 		}
 	}
 `;

@@ -46,7 +46,7 @@ const TagPage = () => {
     return (
         <section className={pageSectionStyles}>
             <Head>
-                <title>{pageTitle}</title>
+                <title>{pageTitle ? `${pageTitle} - Code with Nas` : 'Tags - Code with Nas'}</title>
             </Head>
             {pageTitle ? (
                 <Link className={backButtonStyles} href="/tag">
@@ -82,7 +82,7 @@ export async function getServerSideProps(context) {
         const settledPromises = await resolveBatch([
             {
                 func: fetchHookData(usePosts.fetcher(), context, {
-                    params: { taxonomy: 'post_tag', per_page: 20 },
+                    params: { taxonomy: 'post_tag', per_page: 12 },
                 }),
             },
             { func: fetchHookData(useAppSettings.fetcher(), context), throw: false },

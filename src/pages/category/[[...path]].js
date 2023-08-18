@@ -32,7 +32,7 @@ const CategoryPage = () => {
 		data,
 		loading,
 		error,
-	} = usePosts({ taxonomy: 'category' });
+	} = usePosts({ taxonomy: 'category', per_page: 12 });
 
 	if (loading) {
 		return <Loader />;
