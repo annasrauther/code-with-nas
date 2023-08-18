@@ -35,7 +35,10 @@ const SinglePostsPage = () => {
         data: relatedPosts,
         loading: relatedPostsLoading,
         error: relatedPostsError,
-    } = usePosts({ taxonomy: category.id, per_page: 3 });
+    } = usePosts({
+        taxonomy: 'category',
+        category: category.slug,
+    });
 
     // Display loaders if data is still loading
     if (loading || relatedPostsLoading) {
