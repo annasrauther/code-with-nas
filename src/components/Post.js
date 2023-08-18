@@ -13,13 +13,13 @@ const postStyles = css`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     gap: 1em;
-    background: white;
+    background: var(--color-secondary);
     padding: 1em;
-    border: 1px solid rgba(0,0,0,0.1);
-	box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    border-radius: 5px;
+    border: 1px solid var(--color-border);
+	box-shadow: 0 0 5px var(--color-border);
+    border-radius: var(--border-radius);
     :hover {
         .recent-post__image {
             img {
@@ -28,22 +28,29 @@ const postStyles = css`
         }
     }
 
-    a {
-        border: none;
+    .recent-post__content-title-anchor  {
+        width: 100%;
+        a {
+            display: block;
+            width: 100%;
+        }
     }
     .recent-post__content-title {
-        font-size: 1.5em;
+        font-size: clamp(1.2rem, 1.5vw, 1.5rem);
         font-weight: 900;
-        color: #330;
+        color: var(--color-tertiary);
         margin: 0;
+        font-family: var(--font-family-secondary);
+        text-transform: uppercase;
+        text-align: left;
     }
 
     .recent-post__content {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: flex-start;
-        gap: 0.7em;
+        align-items: center;
+        gap: 1em;
     }
 
     .recent-post__image {
@@ -58,19 +65,46 @@ const postStyles = css`
         
         img {
             transition: all 0.2s ease;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
+        }
+    }
+
+    .recent-post__meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+        span {
+            font-family: var(--font-family-secondary);
+        }
+
+        h4,
+        .recent-post__date {
+            font-size: 0.8em;
+            font-weight: 300;
+            color: var(--color-tertiary);
+            span {
+                font-weight: 400;
+            }
         }
     }
 
     .recent-post__category {
         text-align: center;
         display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 1em;
         flex-wrap: wrap;
         
         h4 {
             letter-spacing: 0.5px;
             font-weight: 400;
+            background: white;
+            :hover {
+                background: var(--color-tertiary);
+            }
         }
     }
 
@@ -78,6 +112,9 @@ const postStyles = css`
         p {
             font-size: 0.9em;
             font-weight: 300;
+            padding-top: 1em;
+            border-top: 1px solid var(--color-border);
+            text-align: justify;
         }
     }
 `;
@@ -109,25 +146,30 @@ const Post = ({ post, showCategory, showTag }) => {
                     {showTag &&
                         post._embedded['wp:term'][1] &&
                         post._embedded['wp:term'][1].length ? (
-                            post._embedded['wp:term'][1].map((term) => (
-                                <Badge key={term.id} term={term} type={'tag'} />
-                            ))
-                        ) : null}
+                        post._embedded['wp:term'][1].map((term) => (
+                            <Badge key={term.id} term={term} type={'tag'} />
+                        ))
+                    ) : null}
                 </div>
-                <Link href={post.link}>
-                    <h3
-                        className="recent-post__content-title"
-                        dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-                    />
-                </Link>
-                {post._embedded.author && post._embedded.author.length ? (
-                    <div className="recent-post__author">
-                        <h4>By {post._embedded.author[0].name}</h4>
-                    </div>
-                ) : null}
-                {post.date ? (
-                    <div className="recent-post__date">{formatDate(post.date)}</div>
-                ) : null}
+                <div className="recent-post__content-title-anchor">
+                    <Link href={post.link}>
+                        <h3
+                            className="recent-post__content-title"
+                            dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+                        />
+                    </Link>
+                </div>
+                <div className="recent-post__meta">
+                    {post.date ? (
+                        <h4 className="recent-post__date">{formatDate(post.date)}</h4>
+                    ) : null}
+
+                    {post._embedded.author && post._embedded.author.length ? (
+                        <h4>By <span>{post._embedded.author[0].name}</span></h4>
+                    ) : null}
+
+                </div>
+
                 {post.excerpt.rendered ? (
                     <div
                         className="recent-post__description"

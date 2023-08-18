@@ -13,7 +13,7 @@ const Seperator = ({ size = 1 }) => {
     <hr
       style={{
         width: '100%',
-        border: `${size}px solid rgba(0, 0, 0, 0.1)`,
+        border: `${size}px solid var(--color-border)`,
       }}
     />
   );

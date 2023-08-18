@@ -1,3 +1,21 @@
+/* Variables */
+
+:root {
+	--color-primary: #b48a3b;
+	/* --color-secondary: hsl(0, 0%, 95%); */
+	--color-secondary: aliceblue;
+	--color-tertiary: #330;
+	--color-border: rgba(0, 0, 0, 0.2);
+	--breakpoint-mobile: 600px;
+	--breakpoint-tablet: 768px;
+	--breakpoint-desktop: 1200px;
+	--breakpoint-hd: 1800px;
+	--border-radius: 5px;
+	--font-family-primary: 'Nunito', sans-serif;
+	--font-family-secondary: 'Libre Baskerville', serif;
+
+}
+
 /*
 Includes Global CSS Styles such as libraries css and WP block library
 */
@@ -30,24 +48,23 @@ a {
 
 /* Apply base styles to HTML and body elements */
 html, body {
-	font-family: 'Nunito', sans-serif;
+	font-family: var(--font-family-primary);
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
-	color: #330;
+	color: var(--color-tertiary);
 }
 
 /* Style for links */
 a {
 	text-decoration: none;
-	border-bottom: 2px solid #b48a3b;
-	color: #330;
+	color: var(--color-tertiary);
 }
 
 /* Hover, active, and focus styles for links */
 a:hover,
 a:active,
 a:focus {
-	color: #000;
+	color: var(--color-primary);
 }
 
 /* Responsive styling for images */
@@ -58,6 +75,6 @@ img {
 
 .container {
 	padding: clamp(10px, 5vw, 3em);
-	max-width: 1800px;
+	max-width: var(--breakpoint-hd);
 	margin: 0 auto;
 }

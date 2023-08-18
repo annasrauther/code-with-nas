@@ -37,7 +37,7 @@ const SinglePostsPage = () => {
     return (
         <div className={singlePostStyles}>
             <Head>
-                <title>{data.post.title.rendered} - Code with Nas</title>
+                <title>{`${data.post.title.rendered} - Code with Nas`}</title>
                 <meta name="description" content={data.post.excerpt.rendered} />
                 <meta property="og:title" content={data.post.title.rendered} />
                 <meta property="og:description" content={data.post.excerpt.rendered} />
@@ -48,41 +48,18 @@ const SinglePostsPage = () => {
             </Head>
             <div className="post-thumbnail"
                 style={{
-                    backgroundImage: `url(${postBackgroundImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center center',
-                    width: '100%',
-                    height: 'clamp(20vh, 20vw, 50vh)',
-                    marginBottom: '1em',
-                    boxShadow: '0 0 5px rgba(0,0,0,0.1)',
-                    borderRadius: '5px',
+                    backgroundImage: `url(${postBackgroundImage})`
                 }}
             />
-            <h1
-                style={{
-                    textAlign: 'center',
-                    fontSize: 'clamp(1.5rem, 3vw, 3.5rem)',
-                    fontWeight: '900',
-                }}
-                className={`${headingStyles} title`}
-                dangerouslySetInnerHTML={{ __html: data.post.title.rendered }}
-            />
-            <div style={{
-                textAlign: 'center',
-                fontWeight: '900',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '10px',
-                fontWeight: '100',
-            }}>
-                <p className="post-author">By {data.post._embedded.author[0].name},</p>
+            <h1 className={`${headingStyles} post-title`} dangerouslySetInnerHTML={{ __html: data.post.title.rendered }} />
+            <div className="post-meta">
+                <p className="post-author">By <span>{data.post._embedded.author[0].name}</span>,</p>
                 <p className="post-date"> {formatDate(data.post.date)}</p>
             </div>
             <div className="post-category">
-                <Badge term={data.post._embedded['wp:term'][0][0]} type={'category'}/>
+                <Badge term={data.post._embedded['wp:term'][0][0]} type={'category'} />
                 {data.post._embedded['wp:term'][1].map((term) => (
-                    <Badge key={term.id} term={term} type={'tag'}/>
+                    <Badge key={term.id} term={term} type={'tag'} />
                 ))}
             </div>
             <div className="post-content">

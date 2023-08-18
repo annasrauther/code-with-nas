@@ -7,9 +7,9 @@ const headerStyles = css`
     position: relative;
     align-items: center;
     justify-content: center;
-    background-color: aliceblue;
+    background-color: var(--color-secondary);
     padding: 10px 20px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--color-border);
 `;
 
 /**

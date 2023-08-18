@@ -41,7 +41,7 @@ const Homepage = ({ terms, posts, loading }) => {
 	return (
 		<div style={{ display: 'grid'}}>
 			<Head>
-				<title>{siteTitle} - Homepage</title>
+				<title>{`${siteTitle} - Homepage`}</title>
 				<meta name="description" content={siteDescription} />
 				<meta property="og:title" content={`${siteTitle} - Homepage`} />
 				<meta property="og:description" content={siteDescription} />
@@ -53,7 +53,7 @@ const Homepage = ({ terms, posts, loading }) => {
 			{/* Hero section */}
 			<Hero terms={terms}/>
 
-			<Seperator size={2}/>
+			<Seperator size={1}/>
 			
 			{/* Latest Articles section */}
 			<LatestArticleSection posts={posts} loading={loading} />

@@ -38,7 +38,7 @@ const LatestArticleSection = ({ posts, loading }) => {
             <h2 style={{ textAlign: 'center' }} className={headingStyles}>
                 Latest Articles
             </h2>
-            <Seperator size={2} />
+            <Seperator size={1} />
             {/* Display list of latest posts */}
             <div className={latestArticleStyles}>
                 <PostList posts={posts} loading={loading} showCategory showTag />
