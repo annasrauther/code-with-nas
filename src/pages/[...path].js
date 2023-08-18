@@ -38,6 +38,7 @@ const SinglePostsPage = () => {
     } = usePosts({
         taxonomy: 'category',
         category: category.slug,
+        per_page: 4,
     });
 
     // Display loaders if data is still loading
