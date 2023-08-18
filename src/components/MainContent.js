@@ -1,18 +1,29 @@
-import { styled } from '@linaria/react';
+// Import dependencies
 import PropTypes from 'prop-types';
 
-const StyledMain = styled.main``;
-
+/**
+ * Main content section component.
+ *
+ * @param {Object} props - Component props.
+ * @param {React.ReactNode} props.children - The content to render within the main section.
+ * @returns {JSX.Element} - MainContent JSX element.
+ */
 export const MainContent = ({ children }) => {
-	return (
-		<div>
-			<section>
-				<StyledMain role="main">{children}</StyledMain>
-			</section>
-		</div>
-	);
+    return (
+        <div>
+            <section>
+                <main role="main">{children}</main>
+            </section>
+        </div>
+    );
 };
 
+// Define PropTypes for the MainContent component
 MainContent.propTypes = {
-	children: PropTypes.node.isRequired,
+    /**
+     * The content to render within the main section.
+     */
+    children: PropTypes.node.isRequired,
 };
+
+export default MainContent;

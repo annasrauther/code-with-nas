@@ -2,9 +2,13 @@
 import { usePost, fetchHookData, addHookData, handleError } from '@headstartwp/next';
 import { BlocksRenderer } from '@headstartwp/core/react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import formatDate from '@/utils/formatDate';
 
 // Import components
 import Badge from '@/components/Badge';
+import Loader from '@/components/Loader';
+import ErrorComponent from '@/components/ErrorComponent';
 
 // Import styles
 import { singlePostStyles } from '@/styles/components';
@@ -16,15 +20,16 @@ import { headingStyles } from '@/styles/components';
  * @returns {JSX.Element} Rendered single post page.
  */
 const SinglePostsPage = () => {
+    const router = useRouter();
     const params = { postType: ['post'] };
     const { loading, error, data } = usePost(params);
 
     if (loading) {
-        return 'Loading...';
+        return <Loader />;
     }
 
     if (error) {
-        return 'Error...';
+        return <ErrorComponent message={error.message} />;
     }
 
     const postBackgroundImage = data.post._embedded['wp:featuredmedia']?.length > 0 ? data.post._embedded['wp:featuredmedia'][0].source_url : '/post-placeholder.avif';
@@ -32,7 +37,14 @@ const SinglePostsPage = () => {
     return (
         <div className={singlePostStyles}>
             <Head>
-                <title>{data.post.title.rendered}</title>
+                <title>{data.post.title.rendered} - Code with Nas</title>
+                <meta name="description" content={data.post.excerpt.rendered} />
+                <meta property="og:title" content={data.post.title.rendered} />
+                <meta property="og:description" content={data.post.excerpt.rendered} />
+                <meta property="og:image" content={postBackgroundImage} />
+                <meta property="og:type" content="article" />
+                <meta property="article:published_time" content={data.post.date} />
+                <link rel="canonical" href={`${process.env.NEXT_PUBLIC_SITE_URL}${router.asPath}`} />
             </Head>
             <div className="post-thumbnail"
                 style={{
@@ -42,7 +54,6 @@ const SinglePostsPage = () => {
                     width: '100%',
                     height: 'clamp(20vh, 20vw, 50vh)',
                     marginBottom: '1em',
-                    border: '1px solid rgba(0,0,0,0.1)',
                     boxShadow: '0 0 5px rgba(0,0,0,0.1)',
                     borderRadius: '5px',
                 }}
@@ -66,13 +77,7 @@ const SinglePostsPage = () => {
                 fontWeight: '100',
             }}>
                 <p className="post-author">By {data.post._embedded.author[0].name},</p>
-                <p className="post-date"> {
-                    new Date(data.post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                    })
-                } </p>
+                <p className="post-date"> {formatDate(data.post.date)}</p>
             </div>
             <div className="post-category">
                 <Badge term={data.post._embedded['wp:term'][0][0]} type={'category'}/>

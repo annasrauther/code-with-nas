@@ -1,7 +1,7 @@
 // Import modules
 import { addHookData, fetchHookData, handleError, useAppSettings } from '@headstartwp/next';
 import Head from 'next/head';
-import { resolveBatch } from '@/utils/promises';
+import resolveBatch from '@/utils/promises';
 
 /**
  * Renders the 404 Page Not Found.

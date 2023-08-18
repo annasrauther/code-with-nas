@@ -1,35 +1,38 @@
-// Import modules
-import PropTypes from "prop-types";
+// Import dependencies
+import PropTypes from 'prop-types';
+import { css } from '@linaria/core';
 
 // Import components
-import TermList from "./TermList";
+import TermList from '@/components/TermList';
 
-// Import styles
-import { headingStyles } from "@/styles/components";
+// Linaria styles
+const categoriesSectionStyles = css`
+    display: grid;
+    justifyContent: flex-start;
+    alignItems: flex-start;
+    gap: 2em;
+`;
 
 /**
  * Categories section component for the homepage.
  *
+ * @component
  * @param {Object} props - Component props.
  * @param {Array} props.terms - List of category terms.
- * @returns {JSX.Element} - Categories section JSX element.
+ * @returns {JSX.Element} Rendered Categories section component.
  */
 const HeroCategoriesSection = ({ terms }) => (
-	<div
-		style={{
-			display: 'grid',
-			justifyContent: 'flex-start',
-			alignItems: 'flex-start',
-			gap: '2em',
-		}}
-	>
-		{/* Display category terms if available */}
-		{terms.length > 0 ? <TermList terms={terms} type={'category'}/> : null}
-	</div>
+    <div className={categoriesSectionStyles}>
+        {/* Display category terms if available */}
+        {terms.length > 0 && <TermList terms={terms} type="category" />}
+    </div>
 );
 
 HeroCategoriesSection.propTypes = {
-	terms: PropTypes.array.isRequired,
+    /**
+     * List of category terms.
+     */
+    terms: PropTypes.array.isRequired,
 };
 
 export default HeroCategoriesSection;
