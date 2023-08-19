@@ -134,13 +134,14 @@ export const singlePostStyles = css`
     }
 
     code:not(pre code) {
-      background: var(--color-tertiary);
+      background: #f5f2f0;
       border-radius: 5px;
-      color: var(--color-secondary);
+      color: var(--color-tertiary);
       display: inline-block;
       font-family: var(--font-family-primary);
       margin: 2px;
       padding: 0.2em 0.4em;
+      border: 1px solid var(--color-border);
     }
 
     figure {
