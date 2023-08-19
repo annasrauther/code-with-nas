@@ -101,8 +101,11 @@ const postStyles = css`
         
         h4 {
             letter-spacing: 0.1px;
-            font-weight: 400;
+            font-weight: normal;
             font-size: 0.8em;
+            :hover {
+                font-weight: bold;
+            }
         }
     }
 

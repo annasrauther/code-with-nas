@@ -25,6 +25,7 @@ import {
 	pageTitleStyles,
 	pageSectionStyles,
 } from '@/styles/components';
+import TermList from '@/components/TermList';
 
 /**
  * Renders a page displaying posts in a specific category.
@@ -38,13 +39,19 @@ const CategoryPage = () => {
 		error,
 	} = usePosts({ taxonomy: 'category', per_page: 12 });
 
+	const {
+		data: termsData,
+		loading: termsLoading,
+		error: termsError,
+	} = useTerms({ taxonomy: 'category' });
+	
 	// Display loading state while fetching data
-	if (loading) {
+	if (loading || termsLoading) {
 		return <Loader />;
 	}
 
 	// Display error message if data fetching fails
-	if (error) {
+	if (error || termsError) {
 		return <ErrorComponent message={error.message} />;
 	}
 
@@ -61,16 +68,31 @@ const CategoryPage = () => {
 			</Head>
 			{pageTitle ? (
 				<Link className={backButtonStyles} href="/category">
-					Go to Latest Posts
+					Go to All Categories
 				</Link>
 			) : (
 				<Link className={backButtonStyles} href="/">
-					Home
+					Back to Home
 				</Link>
 			)}
 			<h1 className={cx(pageTitleStyles, headingStyles)}>
-				Category: <span className="term-title">{pageTitle || 'Latest'}</span>
+				Category: <span className="term-title">{pageTitle || 'All'}</span>
 			</h1>
+
+			{
+                !pageTitle ? (
+                    <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        maxWidth: '95vw',
+                        margin: '0 auto',
+                    }}>
+                        <TermList terms={termsData.terms} type="category" />
+                    </div>
+                ) : null
+            }
+
 			<PostList
 				posts={data.posts}
 				loading={loading}

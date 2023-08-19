@@ -5,7 +5,23 @@ import { css } from '@linaria/core';
 
 // Linaria CSS styling for the logo
 const logoStyles = css`
+    width: 100%;
     text-align: center;
+    padding: 1vw;
+    img {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+`;
+
+const logoStylesSmall = css`
+    width: clamp(200px, 50%, 350px);
+    text-align: center;
+    padding: 1vw;
+    img {
+        max-width: 90%;
+        margin: 0 auto;
+    }
 `;
 
 /**
@@ -14,9 +30,9 @@ const logoStyles = css`
  * @component
  * @returns {JSX.Element} Rendered Logo component.
  */
-export const Logo = () => {
+export const Logo = ({isHomePage}) => {
     const { data, loading } = useAppSettings();
-
+    
     if (loading) {
         return null;
     }
@@ -24,7 +40,7 @@ export const Logo = () => {
     return (
         <Link
             href={data?.settings?.site_url || '/'}
-            className={logoStyles}
+            className={isHomePage ? logoStyles : logoStylesSmall}
         >
             <Image
                 src={'/logo.svg'}

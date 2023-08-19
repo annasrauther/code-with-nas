@@ -25,7 +25,8 @@ export const headingStyles = css`
   align-items: center;
   color: var(--color-tertiary);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   font-family: var(--font-family-secondary);
   font-size: clamp(2em, 5vw + 1em, 3em);
   font-weight: bold;
@@ -46,7 +47,7 @@ export const headingStyles = css`
     font-size: 0.8em;
     font-weight: 900;
     justify-content: center;
-    padding: 0 0.5em;
+    padding: 0.25em 0.5em;
     text-align: center;
     text-transform: uppercase;
   }
@@ -58,11 +59,10 @@ export const singlePostStyles = css`
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    border-radius: var(--border-radius);
     box-shadow: 0 0 5px var(--color-border);
     height: clamp(20vh, 20vw, 50vh);
-    margin-bottom: 1em;
-    width: 100%;
+    margin: -0.5em -0.5em 1em;
+    width: calc(100% + 1em);
   }
 
   .post-category {
@@ -87,7 +87,7 @@ export const singlePostStyles = css`
   .post-title {
     border-bottom: 1px solid var(--color-border);
     font-family: var(--font-family-secondary);
-    font-size: clamp(1.5rem, 3vw, 3.5rem);
+    font-size: clamp(1.5rem, 2.5vw, 3rem);
     font-weight: 900;
     margin-bottom: 0.5em;
     padding-bottom: 0.5em;
@@ -193,6 +193,7 @@ export const singlePostStyles = css`
     p {
       font-weight: 300;
       margin-bottom: 0.5em;
+      text-align: justify;
     }
 
     ol,
