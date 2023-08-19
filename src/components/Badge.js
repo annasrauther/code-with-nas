@@ -19,6 +19,15 @@ const badgeStyles = css`
     box-shadow: 0 0 5px var(--color-border);
     transition: all 0.1s ease;
 
+    span {
+        height: 1px;
+        display: inline-block;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+
     :hover {
         background: var(--color-tertiary);
         color: var(--color-secondary);
@@ -36,10 +45,14 @@ const badgeStyles = css`
  * @returns {JSX.Element} Rendered Badge component.
  */
 const Badge = ({ term, type }) => {
+    const badgeColor = type === 'category' ? '#e90' : '#690';
     return (
         <Link href={term.link}>
-            <h4     title={type} className={badgeStyles}>
+            <h4 title={type} className={badgeStyles}>
                 {term.name}
+                <span style={{
+                    background: badgeColor,
+                }}></span>
             </h4>
         </Link>
     );

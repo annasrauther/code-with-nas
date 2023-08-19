@@ -121,6 +121,21 @@ export const singlePostStyles = css`
     max-width: 700px;
     padding: 2em 1.5em;
 
+    table {
+      border-collapse: collapse;
+      width: 100%;
+
+      thead {
+        border-bottom: 3px solid;
+      }
+      
+      th,
+      td {
+        border: 1px solid;
+        padding: 0.5em;
+      }
+    }
+
     a {
       border-bottom: 1px solid var(--color-primary);
       color: var(--color-primary);
@@ -142,6 +157,11 @@ export const singlePostStyles = css`
       margin: 2px;
       padding: 0.2em 0.4em;
       border: 1px solid var(--color-border);
+    }
+
+    code {
+      white-space: pre-wrap;
+      display: block;
     }
 
     figure {
