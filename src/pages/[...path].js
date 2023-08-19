@@ -4,6 +4,7 @@ import { BlocksRenderer } from '@headstartwp/core/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import formatDate from '@/utils/formatDate';
+import Prism from 'prismjs';
 
 // Import components
 import Badge from '@/components/Badge';
@@ -14,6 +15,7 @@ import RelatedPosts from '@/components/RelatedPosts';
 // Import styles
 import { singlePostStyles } from '@/styles/components';
 import { headingStyles } from '@/styles/components';
+import 'prismjs/themes/prism.css';
 
 /**
  * Renders a single post page.
@@ -50,6 +52,9 @@ const SinglePostsPage = () => {
     if (error || relatedPostsError) {
         return <ErrorComponent message={error.message} />;
     }
+
+    // Highlight code blocks
+    Prism.highlightAll();
 
     // Determine the post background image
     const postBackgroundImage = data.post._embedded['wp:featuredmedia']?.length > 0
@@ -96,7 +101,9 @@ const SinglePostsPage = () => {
             
             {/* Post content */}
             <div className="post-content">
-                <BlocksRenderer html={data.post.content.rendered} />
+                <BlocksRenderer
+                    html={data.post.content.rendered}
+                />
             </div>
 
             {/* Display related posts */}

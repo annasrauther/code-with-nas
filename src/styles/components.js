@@ -133,7 +133,7 @@ export const singlePostStyles = css`
       }
     }
 
-    code {
+    code:not(pre code) {
       background: var(--color-tertiary);
       border-radius: 5px;
       color: var(--color-secondary);
@@ -206,21 +206,6 @@ export const singlePostStyles = css`
     ul {
       list-style: circle;
     }
-
-    .wp-block-code {
-      max-width: 100%;
-      overflow: scroll;
-
-      code {
-        background: var(--color-tertiary);
-        color: var(--color-secondary);
-        display: block;
-        margin: 0;
-        margin-bottom: 1em;
-        overflow: scroll;
-        padding: 1.5em;
-      }
-    }
   }
 `;
 
@@ -253,6 +238,7 @@ export const pageTitleStyles = css`
   display: flex;
   font-family: var(--font-family-secondary);
   gap: 10px;
+  font-size: clamp(2em,1vw + 1em,3em);
   justify-content: center;
   padding-bottom: 20px;
 `;
