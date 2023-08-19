@@ -2,7 +2,6 @@ import { useAppSettings } from '@headstartwp/next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { css } from '@linaria/core';
-import { useRouter } from 'next/router';
 
 // Linaria CSS styling for the logo
 const logoStyles = css`
