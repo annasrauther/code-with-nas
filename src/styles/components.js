@@ -193,6 +193,7 @@ export const singlePostStyles = css`
     p {
       font-weight: 300;
       margin-bottom: 0.5em;
+      text-align: justify;
     }
 
     ol,

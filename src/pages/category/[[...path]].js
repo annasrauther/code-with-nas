@@ -85,7 +85,8 @@ const CategoryPage = () => {
                         display: 'flex',
                         flexWrap: 'wrap',
                         justifyContent: 'center',
-                        marginBottom: '2rem',
+                        maxWidth: '95vw',
+                        margin: '0 auto',
                     }}>
                         <TermList terms={termsData.terms} type="category" />
                     </div>
