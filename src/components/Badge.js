@@ -8,7 +8,7 @@ const badgeStyles = css`
     border: 1px solid var(--color-border);
     display: inline-block;
     font-size: 1em;
-    font-weight: 400;
+    font-weight: normal;
     letter-spacing: 1px;
     padding: 9px 15px 8px;
     position: relative;
@@ -17,11 +17,12 @@ const badgeStyles = css`
     color: var(--color-tertiary);
     border-radius: var(--border-radius);
     box-shadow: 0 0 5px var(--color-border);
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
 
     :hover {
         background: var(--color-tertiary);
         color: var(--color-secondary);
+        font-weight: bold;
     }
 `;
 
@@ -37,7 +38,7 @@ const badgeStyles = css`
 const Badge = ({ term, type }) => {
     return (
         <Link href={term.link}>
-            <h4 title={type} className={badgeStyles}>
+            <h4     title={type} className={badgeStyles}>
                 {term.name}
             </h4>
         </Link>

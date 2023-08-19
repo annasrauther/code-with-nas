@@ -92,7 +92,7 @@ export async function getStaticProps(context) {
 				// Fetch posts using usePosts hook
 				func: fetchHookData(usePosts.fetcher(), context, {
 					params: {
-						per_page: 5,
+						per_page: 3,
 					},
 				}),
 			},

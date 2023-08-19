@@ -6,6 +6,7 @@ import {
     addHookData,
     handleError,
     useAppSettings,
+    useTerms,
 } from '@headstartwp/next';
 import resolveBatch from '@/utils/promises';
 import Link from 'next/link';
@@ -17,6 +18,7 @@ import PostList from '@/components/PostList';
 import Loader from '@/components/Loader';
 import ErrorComponent from '@/components/ErrorComponent';
 import { Pagination } from '@/components/Pagination';
+import TermList from '@/components/TermList';
 
 // Import styles
 import {
@@ -35,13 +37,19 @@ const TagPage = () => {
     // Fetch posts with the 'post_tag' taxonomy
     const { data, loading, error } = usePosts({ taxonomy: 'post_tag' });
 
+    const {
+        data: termsData,
+        loading: termsLoading,
+        error: termsError,
+    } = useTerms({ taxonomy: 'post_tag' });
+
     // Display a loader while fetching data
-    if (loading) {
+    if (loading || termsLoading) {
         return <Loader />;
     }
 
     // Display an error component if an error occurred during fetching
-    if (error) {
+    if (error || termsError) {
         return <ErrorComponent message={error.message} />;
     }
 
@@ -55,17 +63,30 @@ const TagPage = () => {
             {/* Display a link to go back to the tag or home page */}
             {pageTitle ? (
                 <Link className={backButtonStyles} href="/tag">
-                    Go to Latest Posts
+                    Go to All Tags
                 </Link>
             ) : (
                 <Link className={backButtonStyles} href="/">
-                    Home
+                    Back to Home
                 </Link>
             )}
             <h1 className={cx(pageTitleStyles, headingStyles)}>
-                Tags: <span className="term-title">{pageTitle || 'Latest'}</span>
+                Tags: <span className="term-title">{pageTitle || 'All'}</span>
             </h1>
-            
+
+            {
+                !pageTitle ? (
+                    <div style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        justifyContent: 'center',
+                        marginBottom: '2rem',
+                    }}>
+                        <TermList terms={termsData.terms} type="category" />
+                    </div>
+                ) : null
+            }
+
             {/* Display the list of posts */}
             <PostList
                 posts={data.posts}
@@ -73,7 +94,7 @@ const TagPage = () => {
                 showCategory={true}
                 showTag={true}
             />
-            
+
             {/* Display pagination if a specific tag is selected */}
             {pageTitle && <Pagination pageInfo={data.pageInfo} />}
         </section>
