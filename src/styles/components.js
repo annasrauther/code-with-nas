@@ -133,14 +133,15 @@ export const singlePostStyles = css`
       }
     }
 
-    code {
-      background: var(--color-tertiary);
+    code:not(pre code) {
+      background: #f5f2f0;
       border-radius: 5px;
-      color: var(--color-secondary);
+      color: var(--color-tertiary);
       display: inline-block;
       font-family: var(--font-family-primary);
       margin: 2px;
       padding: 0.2em 0.4em;
+      border: 1px solid var(--color-border);
     }
 
     figure {
@@ -206,21 +207,6 @@ export const singlePostStyles = css`
     ul {
       list-style: circle;
     }
-
-    .wp-block-code {
-      max-width: 100%;
-      overflow: scroll;
-
-      code {
-        background: var(--color-tertiary);
-        color: var(--color-secondary);
-        display: block;
-        margin: 0;
-        margin-bottom: 1em;
-        overflow: scroll;
-        padding: 1.5em;
-      }
-    }
   }
 `;
 
@@ -253,6 +239,7 @@ export const pageTitleStyles = css`
   display: flex;
   font-family: var(--font-family-secondary);
   gap: 10px;
+  font-size: clamp(2em,1vw + 1em,3em);
   justify-content: center;
   padding-bottom: 20px;
 `;
