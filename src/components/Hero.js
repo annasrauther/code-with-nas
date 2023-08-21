@@ -30,7 +30,7 @@ const Hero = ({ terms }) => (
         {/* Text content */}
         <div className={textContentStyles}>
             <h1 className={headingStyles}>Discover short code snippets for all your development needs.</h1>
-            <h3
+            <h2
                 style={{
                     fontWeight: 'normal',
                     fontSize: '1.2em',
@@ -39,7 +39,7 @@ const Hero = ({ terms }) => (
                 }}
             >
                 Browse snippets by collection or check out our top picks and latest articles below.
-            </h3>
+            </h2>
             <HeroCategoriesSection terms={terms} />
         </div>
         {/* Hero Image */}

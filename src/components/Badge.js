@@ -52,12 +52,12 @@ const Badge = ({ term, type }) => {
     const badgeColor = type === 'category' ? '#e90' : '#690';
     return (
         <Link href={term.link}>
-            <h4 title={type} className={badgeStyles}>
+            <div title={type} className={badgeStyles}>
                 {term.name}
                 <span style={{
                     background: badgeColor,
                 }}></span>
-            </h4>
+            </div>
         </Link>
     );
 };

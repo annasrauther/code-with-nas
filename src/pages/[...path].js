@@ -1,10 +1,12 @@
 // Import necessary modules
 import { usePost, usePosts, fetchHookData, addHookData, handleError } from '@headstartwp/next';
 import { BlocksRenderer } from '@headstartwp/core/react';
+import { isBlock } from '@headstartwp/core';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import formatDate from '@/utils/formatDate';
 import Prism from 'prismjs';
+
 
 // Import components
 import Badge from '@/components/Badge';
@@ -107,7 +109,12 @@ const SinglePostsPage = () => {
                     html={data.post.content.rendered}
                 >
                     {/* Render the quiz component from the post content */}
-                    <Quiz tagName="div" classList="cwn-multiple-choice-quiz-ui" />
+                    <Quiz
+                        test={(node) => isBlock(node, {
+                            tagName: 'div',
+                            className: 'cwn-multiple-choice-quiz-ui'
+                        })}
+                     />
                 </BlocksRenderer>
             </div>
 

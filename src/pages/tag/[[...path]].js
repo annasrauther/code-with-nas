@@ -35,7 +35,7 @@ import {
  */
 const TagPage = () => {
     // Fetch posts with the 'post_tag' taxonomy
-    const { data, loading, error } = usePosts({ taxonomy: 'post_tag' });
+    const { data, loading, error } = usePosts({ taxonomy: 'post_tag', per_page: 12 });
 
     const {
         data: termsData,
@@ -59,6 +59,7 @@ const TagPage = () => {
         <section className={pageSectionStyles}>
             <Head>
                 <title>{pageTitle ? `${pageTitle} - Code with Nas` : 'Tags - Code with Nas'}</title>
+                <meta name="description" content="Tags related to web development" />
             </Head>
             {/* Display a link to go back to the tag or home page */}
             {pageTitle ? (
@@ -73,6 +74,12 @@ const TagPage = () => {
             <h1 className={cx(pageTitleStyles, headingStyles)}>
                 Tags: <span className="term-title">{pageTitle || 'All'}</span>
             </h1>
+            <h2 style={{
+                fontSize: '1em',
+                padding: '0 10vw',
+                textAlign: 'center',
+                fontWeight: '100',
+            }}>{'A wide variety of snippet and article collections for all your development needs. Explore individual language collections or browse through collections about specific topics and programming concepts.'}</h2>
 
             {
                 !pageTitle ? (
