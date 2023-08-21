@@ -41,6 +41,7 @@ const SinglePostsPage = () => {
     } = usePosts({
         taxonomy: 'category',
         category: category.slug,
+        exclude: data.post.id,
         per_page: 3,
     });
 
