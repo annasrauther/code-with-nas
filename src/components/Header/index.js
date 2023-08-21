@@ -4,7 +4,7 @@ import { css } from '@linaria/core';
 
 // Import components
 import { Logo } from '@/components/Header/Logo';
-import Link from '../Link';
+import Menu from '@/components/Header/Menu';
 
 // Linaria CSS styling for the header
 const headerStyles = css`
@@ -51,6 +51,20 @@ const headerStyles = css`
     }
 `;
 
+// Hardcoded navigation links
+const navigationLinks = [
+    {
+        id: 1,
+        label: 'Categories',
+        url: '/category',
+    },
+    {
+        id: 2,
+        label: 'Tags',
+        url: '/tag',
+    },
+];
+
 /**
  * Header component for the application.
  *
@@ -65,19 +79,7 @@ const Header = () => {
         <header role="banner" className={headerStyles}>
             <Logo isHomePage={isHomePage} />
             {
-                isHomePage ? null : (
-                    <ul className="header-menu">
-                        <li>
-                            <Link href="/">Home</Link>
-                        </li>
-                        <li>
-                            <Link href="/category">Categories</Link>
-                        </li>
-                        <li>
-                            <Link href="/tag">Tags</Link>
-                        </li>
-                    </ul>
-                )
+                isHomePage ? null : <Menu navigationLinks={navigationLinks} router={router} />
             }
 
         </header>

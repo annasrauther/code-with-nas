@@ -1,3 +1,4 @@
+// Import dependencies
 import PropTypes from 'prop-types';
 import { css } from '@linaria/core';
 

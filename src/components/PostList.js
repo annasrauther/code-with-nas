@@ -4,6 +4,7 @@ import { css } from '@linaria/core';
 
 // Import components
 import Post from '@/components/Post';
+import Loader from '@/components/Loader';
 
 // Styles for the post list component
 const postListStyles = css`
@@ -24,7 +25,7 @@ const postListStyles = css`
  */
 const PostList = ({ posts, loading, showCategory, showTag }) => {
     if (loading) {
-        return <p>Loading Recent Posts...</p>;
+        return <Loader />;
     }
 
     return (

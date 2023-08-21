@@ -3,6 +3,7 @@ import { css } from '@linaria/core';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
+// Styles for the quiz component
 const cwnQuiz = css`
     position: relative;
     padding: 1em;
@@ -139,6 +140,7 @@ const Quiz = ({ domNode }) => {
         }}>
             <p className="cwn-quiz-question">{question}</p>
             <ul className="cwn-quiz-answer">
+                {/* Loop through the answers and render them */}
                 {answers.map((answer, index) => (
                     <li
                         key={index}
@@ -150,6 +152,7 @@ const Quiz = ({ domNode }) => {
                     </li>
                 ))}
             </ul>
+            {/* Show a success message */}
             {showSuccess && (
                 <div className="cwn-quiz-message success-message">
                     <p>
@@ -160,6 +163,7 @@ const Quiz = ({ domNode }) => {
                     </p>
                 </div>
             )}
+            {/* Show a success message */}
             {showFailure && (
                 <div className="cwn-quiz-message failure-message">
                     <p>

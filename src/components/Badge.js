@@ -1,5 +1,8 @@
+// Import dependencies
 import PropTypes from 'prop-types';
 import { css } from '@linaria/core';
+
+// Import components
 import Link from '@/components/Link';
 
 // Linaria CSS styling for the badge

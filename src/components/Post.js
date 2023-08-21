@@ -139,6 +139,7 @@ const Post = ({ post, showCategory, showTag }) => {
         <div className={postStyles}>
             <div className="recent-post__image">
                 <Link href={post.link}>
+                    {/* If the post has a featured image, display it. Otherwise, display a placeholder image. */}
                     {post._embedded['wp:featuredmedia'] ? (
                         <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
                     ) : (
@@ -148,9 +149,11 @@ const Post = ({ post, showCategory, showTag }) => {
             </div>
             <div className="recent-post__content">
                 <div className="recent-post__category">
+                    {/* If the post has a category, display it. */}
                     {showCategory && post._embedded['wp:term'][0] && post._embedded['wp:term'][0].length ? (
                         <Badge term={post._embedded['wp:term'][0][0]} type={'category'} />
                     ) : null}
+                    {/* If the post has a tag, display it. */}
                     {showTag &&
                         post._embedded['wp:term'][1] &&
                         post._embedded['wp:term'][1].length ? (
@@ -168,16 +171,19 @@ const Post = ({ post, showCategory, showTag }) => {
                     </Link>
                 </div>
                 <div className="recent-post__meta">
+                    {/* If the post has a date, display it. */}
                     {post.date ? (
                         <h4 className="recent-post__date">{formatDate(post.date)}</h4>
                     ) : null}
 
+                    {/* If the post has an author, display it. */}
                     {post._embedded.author && post._embedded.author.length ? (
                         <h4>By <span>{post._embedded.author[0].name}</span></h4>
                     ) : null}
 
                 </div>
 
+                {/* If the post has an excerpt, display it. */}
                 {post.excerpt.rendered ? (
                     <div
                         className="recent-post__description"
