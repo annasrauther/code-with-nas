@@ -103,6 +103,7 @@ const Quiz = ({ domNode }) => {
         question,
         answers,
         correctAnswer,
+        backgroundColor,
     } = JSON.parse(domNode.attribs['data-wp-block']);
 
     const [showSuccess, setShowSuccess] = useState(false);
@@ -133,7 +134,9 @@ const Quiz = ({ domNode }) => {
     };
 
     return (
-        <div className={cwnQuiz}>
+        <div className={cwnQuiz} style={{
+            backgroundColor: backgroundColor,
+        }}>
             <p className="cwn-quiz-question">{question}</p>
             <ul className="cwn-quiz-answer">
                 {answers.map((answer, index) => (
