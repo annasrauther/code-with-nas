@@ -11,6 +11,7 @@ import Badge from '@/components/Badge';
 import Loader from '@/components/Loader';
 import ErrorComponent from '@/components/ErrorComponent';
 import RelatedPosts from '@/components/RelatedPosts';
+import Quiz from '@/components/Quiz';
 
 // Import styles
 import { singlePostStyles } from '@/styles/components';
@@ -103,7 +104,10 @@ const SinglePostsPage = () => {
             <div className="post-content">
                 <BlocksRenderer
                     html={data.post.content.rendered}
-                />
+                >
+                    {/* Render the quiz component from the post content */}
+                    <Quiz tagName="div" classList="cwn-multiple-choice-quiz-ui" />
+                </BlocksRenderer>
             </div>
 
             {/* Display related posts */}

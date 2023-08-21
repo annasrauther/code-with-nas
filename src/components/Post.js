@@ -86,7 +86,7 @@ const postStyles = css`
             font-weight: 300;
             color: var(--color-tertiary);
             span {
-                font-weight: 400;
+                font-weight: bold;
             }
         }
     }
@@ -134,11 +134,13 @@ const Post = ({ post, showCategory, showTag }) => {
     return (
         <div className={postStyles}>
             <div className="recent-post__image">
-                {post._embedded['wp:featuredmedia'] ? (
-                    <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
-                ) : (
-                    <Image src="/post-placeholder.avif" alt={post.title.rendered} width={300} height={300} />
-                )}
+                <Link href={post.link}>
+                    {post._embedded['wp:featuredmedia'] ? (
+                        <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
+                    ) : (
+                        <Image src="/post-placeholder.avif" alt={post.title.rendered} width={300} height={300} />
+                    )}
+                </Link>
             </div>
             <div className="recent-post__content">
                 <div className="recent-post__category">
