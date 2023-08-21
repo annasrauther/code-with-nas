@@ -11,7 +11,6 @@ import Image from 'next/image';
 const logoStyles = css`
     width: 100%;
     text-align: center;
-    padding: 1vw;
     img {
         max-width: 90%;
         margin: 0 auto;

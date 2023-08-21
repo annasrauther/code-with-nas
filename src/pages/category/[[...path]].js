@@ -65,6 +65,7 @@ const CategoryPage = () => {
 						? `${pageTitle} - Code with Nas`
 						: 'Categories - Code with Nas'}
 				</title>
+				<meta name="description" content="Categories related to web development" />
 			</Head>
 			{pageTitle ? (
 				<Link className={backButtonStyles} href="/category">
@@ -78,6 +79,12 @@ const CategoryPage = () => {
 			<h1 className={cx(pageTitleStyles, headingStyles)}>
 				Category: <span className="term-title">{pageTitle || 'All'}</span>
 			</h1>
+			<h2 style={{
+                fontSize: '1em',
+                padding: '0 10vw',
+                textAlign: 'center',
+                fontWeight: '100',
+            }}>{'A wide variety of snippet and article collections for all your development needs. Explore individual language collections or browse through collections about specific topics and programming concepts.'}</h2>
 
 			{
                 !pageTitle ? (

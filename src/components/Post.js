@@ -104,7 +104,8 @@ const postStyles = css`
         flex-wrap: wrap;
         width: 100%;
         
-        h4 {
+        [title="category"],
+        [title="tag"] {
             letter-spacing: 0.1px;
             font-weight: normal;
             font-size: 0.8em;

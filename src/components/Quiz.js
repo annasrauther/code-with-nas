@@ -192,7 +192,7 @@ Quiz.propTypes = {
         attribs: PropTypes.shape({
             'data-wp-block': PropTypes.string.isRequired,
         }).isRequired,
-    }).isRequired,
+    }),
 };
 
 export default Quiz;
