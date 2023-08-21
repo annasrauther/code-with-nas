@@ -51,6 +51,7 @@ const postStyles = css`
         justify-content: flex-start;
         align-items: center;
         gap: 1em;
+        width: 100%;
     }
 
     .recent-post__image {
