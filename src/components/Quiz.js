@@ -7,7 +7,9 @@ const cwnQuiz = css`
     position: relative;
     padding: 1em;
     border: 1px solid var(--color-border);
+    box-shadow: 0 0 5px var(--color-secondary);
     border-radius: var(--border-radius);
+    margin: 1em 0;
 
     p.cwn-quiz-question {
         border-bottom: 1px solid var(--color-border);
@@ -17,15 +19,14 @@ const cwnQuiz = css`
     ul.cwn-quiz-answer {
         list-style: none;
         display: grid;
-        gap: 0.5em;
+        gap: 1em;
         margin: 1em 0 0;
         padding: 0;
 
-        @media (min-width: 768px) {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
         li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 0.5rem;
             margin: 0;
             font-family: var(--font-family-secondary);

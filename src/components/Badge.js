@@ -20,12 +20,13 @@ const badgeStyles = css`
     transition: all 0.1s ease;
 
     span {
-        height: 1px;
+        height: 1.3px;
         display: inline-block;
         position: absolute;
-        bottom: 0;
-        right: 0;
+        bottom: 0px;
+        right: 0px;
         left: 0;
+        border-radius: 3px;
     }
 
     :hover {
