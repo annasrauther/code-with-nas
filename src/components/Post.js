@@ -63,6 +63,10 @@ const postStyles = css`
         gap: 1em;
         overflow: hidden;
         width: 100%;
+
+        a {
+            width: 100%;
+        }
         
         img {
             transition: all 0.2s ease;
