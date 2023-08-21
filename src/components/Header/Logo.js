@@ -1,7 +1,11 @@
+// Import dependencies
 import { useAppSettings } from '@headstartwp/next';
+import { css } from '@linaria/core';
+import PropTypes from 'prop-types';
+
+// Import components
 import Link from 'next/link';
 import Image from 'next/image';
-import { css } from '@linaria/core';
 
 // Linaria CSS styling for the logo
 const logoStyles = css`
@@ -51,5 +55,16 @@ export const Logo = ({isHomePage}) => {
         </Link>
     );
 };
+
+/**
+ * PropTypes for the Logo component.
+ * 
+ * @type {object}
+ * @property {boolean} isHomePage - Whether the logo is being rendered on the home page.
+ */
+Logo.propTypes = {
+    isHomePage: PropTypes.bool,
+};
+
 
 export default Logo;
