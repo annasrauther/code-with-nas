@@ -1,38 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Code with Nas - HeadstartWp App
+
+"Code with Nas" is a focused Proof of Concept (POC) developed as part of a job application, inspired by insights from 30 Seconds of Code. It offers tailored code snippets and informative articles to enhance the development experience.
+
+## Project Overview
+
+This project presents a Headless CMS WordPress power by Next.js application that elegantly integrates the following technologies:
+
+- [HeadstartWp Framework](https://headstartwp.10up.com/): Harnessing the power of WordPress as a headless content management system.
+- [Next.js Page Router](https://nextjs.org/): Facilitating seamless and dynamic page navigation.
+- [WordPress](https://wordpress.org/): Serving as the trusted source for content and content management.
 
 ## Getting Started
 
-First, run the development server:
+To initiate the development server, adhere to these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Clone this repository to your local environment.
+2. Navigate to the project directory.
+3. Install the requisite project dependencies using one of the following commands:
+   - `npm install`
+   - `yarn install`
+   - `pnpm install`
+4. Commence the development server using one of the following commands:
+   - `npm run dev`
+   - `yarn dev`
+   - `pnpm dev`
+5. Access the project by opening your preferred browser and visiting http://localhost:3000.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Begin your journey by editing files within the `pages` directory. Each modification triggers automatic updates to the corresponding page.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Explore the creation of API routes: Although no `hello.js` file exists, you can craft your API within the `pages/api` directory.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+For a comprehensive understanding of the technologies underpinning this project, delve into the following authoritative resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js Documentation](https://nextjs.org/docs): Acquaint yourself with Next.js features and APIs.
+- [Learn Next.js](https://nextjs.org/learn): Engage in an interactive tutorial to master Next.js.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Additionally, consider delving into the [Next.js GitHub repository](https://github.com/vercel/next.js) for insights, feedback, and contributions.
 
-## Deploy on Vercel
+## Deployment with Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Streamline the deployment process for your Next.js app using the Vercel Platform, crafted by the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+For comprehensive deployment guidance, follow the steps outlined in our official [Next.js deployment documentation](https://nextjs.org/docs/deployment) on the Next.js website.
+
+## Explore the Project
+
+- [GitHub Repository](https://github.com/annasrauther/code-with-nas/)
+- [Live Demo](https://code-with-nas.vercel.app/)

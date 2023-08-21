@@ -119,7 +119,7 @@ export const singlePostStyles = css`
     box-shadow: 0 0 5px var(--color-border);
     margin: 0 auto;
     max-width: 700px;
-    padding: 2em 1.5em;
+    padding: 2em 2.5em;
 
     table {
       border-collapse: collapse;
@@ -128,7 +128,7 @@ export const singlePostStyles = css`
       thead {
         border-bottom: 3px solid;
       }
-      
+
       th,
       td {
         border: 1px solid;
@@ -154,7 +154,7 @@ export const singlePostStyles = css`
       color: var(--color-tertiary);
       display: inline-block;
       font-family: var(--font-family-primary);
-      margin: 2px;
+      margin: 2px 0;
       padding: 0.2em 0.4em;
       border: 1px solid var(--color-border);
     }
