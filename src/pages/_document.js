@@ -48,6 +48,7 @@ class CustomDocument extends Document {
             <link rel="stylesheet"
               href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&display=swap" />
           </noscript>
+          <link rel="canonical" href="https://code-with-nas.vercel.app/" />
         </Head>
         <body>
           {/*
