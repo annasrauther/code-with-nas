@@ -1,31 +1,10 @@
 // Import dependencies
 import { useAppSettings } from '@headstartwp/next';
-import { css } from '@linaria/core';
 import PropTypes from 'prop-types';
 
 // Import components
 import Link from 'next/link';
 import Image from 'next/image';
-
-// Linaria CSS styling for the logo
-const logoStyles = css`
-    width: 100%;
-    text-align: center;
-    img {
-        max-width: 90%;
-        margin: 0 auto;
-    }
-`;
-
-const logoStylesSmall = css`
-    width: clamp(200px, 50%, 350px);
-    text-align: center;
-    padding: 1vw;
-    img {
-        max-width: 90%;
-        margin: 0 auto;
-    }
-`;
 
 /**
  * Logo component for the application.
@@ -33,7 +12,7 @@ const logoStylesSmall = css`
  * @component
  * @returns {JSX.Element} Rendered Logo component.
  */
-export const Logo = ({isHomePage}) => {
+export const Logo = () => {
     const { data, loading } = useAppSettings();
     
     if (loading) {
@@ -43,28 +22,21 @@ export const Logo = ({isHomePage}) => {
     return (
         <Link
             href={data?.settings?.site_url || '/'}
-            className={isHomePage ? logoStyles : logoStylesSmall}
+            style={{
+                width: 'clamp(200px, 50%, 350px)',
+                textAlign: 'center',
+                padding: '1vw',
+            }}
         >
             <Image
                 src={'/logo.svg'}
                 alt={data?.settings?.site_name || 'Code With Nas'}
-                width={'1000'}
-                height={'1000'}
+                width={'300'}
+                height={'100'}
                 loading={'eager'}
             />
         </Link>
     );
 };
-
-/**
- * PropTypes for the Logo component.
- * 
- * @type {object}
- * @property {boolean} isHomePage - Whether the logo is being rendered on the home page.
- */
-Logo.propTypes = {
-    isHomePage: PropTypes.bool,
-};
-
 
 export default Logo;

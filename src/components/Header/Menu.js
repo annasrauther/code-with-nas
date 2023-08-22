@@ -1,9 +1,35 @@
 // Import dependencies
 import PropTypes from 'prop-types';
+import { css } from '@linaria/core';
 
 // Import components
 import Link from '@/components/Link';
 
+const menuStyles = css`
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 1em;
+  margin: 0.5em;
+  font-size: 1.3em;
+  width: 100%;
+  justify-content: space-evenly;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding-top: 10px;
+
+  @media (min-width: 768px) {
+      margin: 0;
+      margin-right: 2vw;
+      justify-content: flex-end;
+      border-top: none;
+      padding-top: 0;
+  }
+  
+  a:hover {
+      text-decoration: underline;
+      font-weight: bold;
+  }
+`;
 /**
  * Menu component to render navigation links.
  *
@@ -18,7 +44,7 @@ import Link from '@/components/Link';
  */
 const Menu = ({ navigationLinks, router }) => {
   return (
-    <ul className="header-menu">
+    <ul className={menuStyles}>
       {navigationLinks.map((link) => (
         <li
           key={link.id}

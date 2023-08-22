@@ -46,9 +46,4 @@ Link.propTypes = {
     children: PropTypes.node.isRequired,
 };
 
-// Default props for the Link component
-Link.defaultProps = {
-    rel: '',
-};
-
 export default Link;
