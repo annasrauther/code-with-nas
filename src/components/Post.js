@@ -142,9 +142,9 @@ const Post = ({ post, showCategory, showTag }) => {
                 <Link href={post.link}>
                     {/* If the post has a featured image, display it. Otherwise, display a placeholder image. */}
                     {post._embedded['wp:featuredmedia'] ? (
-                        <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={300} height={300} />
+                        <Image src={post._embedded['wp:featuredmedia'][0].source_url} alt={post.title.rendered} width={500} height={500} />
                     ) : (
-                        <Image src="/post-placeholder.avif" alt={post.title.rendered} width={300} height={300} />
+                        <Image src="/post-placeholder.avif" alt={post.title.rendered} width={500} height={500} />
                     )}
                 </Link>
             </div>
