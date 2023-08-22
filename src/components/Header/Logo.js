@@ -48,8 +48,8 @@ export const Logo = ({isHomePage}) => {
             <Image
                 src={'/logo.svg'}
                 alt={data?.settings?.site_name || 'Code With Nas'}
-                width={'150'}
-                height={'90'}
+                width={'1000'}
+                height={'1000'}
                 loading={'eager'}
             />
         </Link>

@@ -167,6 +167,7 @@ export const singlePostStyles = css`
     figure {
       margin: 1em 0;
 
+      // For images that are different sizes.
       img {
         height: auto !important;
         width: 100% !important;
