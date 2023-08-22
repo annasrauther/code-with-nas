@@ -29,7 +29,7 @@ export const headingStyles = css`
   flex-wrap: wrap;
   font-family: var(--font-family-secondary);
   font-size: clamp(2em, 5vw + 1em, 3em);
-  font-weight: bold;
+  font-weight: lighter;
   justify-content: center;
   text-transform: uppercase;
 
@@ -88,7 +88,7 @@ export const singlePostStyles = css`
     border-bottom: 1px solid var(--color-border);
     font-family: var(--font-family-secondary);
     font-size: clamp(1.5rem, 2.5vw, 3rem);
-    font-weight: 900;
+    font-weight: lighter;
     margin-bottom: 0.5em;
     padding-bottom: 0.5em;
     text-align: center;
@@ -182,7 +182,7 @@ export const singlePostStyles = css`
     h6 {
       border-bottom: 1px solid var(--color-border);
       font-family: var(--font-family-secondary);
-      font-weight: 600;
+      font-weight: lighter;
       margin: 1em 0;
       padding-bottom: 0.25em;
     }
@@ -259,6 +259,7 @@ export const pageTitleStyles = css`
   border-bottom: 1px solid var(--color-border);
   display: flex;
   font-family: var(--font-family-secondary);
+  font-weight: lighter;
   gap: 10px;
   font-size: clamp(2em,1vw + 1em,3em);
   justify-content: center;
