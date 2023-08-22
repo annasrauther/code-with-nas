@@ -80,18 +80,12 @@ const postStyles = css`
         align-items: center;
         gap: 1em;
         width: 100%;
-        span {
-            font-family: var(--font-family-secondary);
-        }
-
+        
         h4,
         .recent-post__date {
             font-size: 0.8em;
             font-weight: 300;
             color: var(--color-tertiary);
-            span {
-                font-weight: bold;
-            }
         }
     }
 
