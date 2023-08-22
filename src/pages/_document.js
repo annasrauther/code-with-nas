@@ -28,14 +28,14 @@ class CustomDocument extends Document {
           */}
           <link rel="preload"
             as="style"
-            href="https://fonts.googleapis.com/css2?family=Raleway&family=Bricolage+Grotesque&display=swap" />
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&display=swap" />
 
           {/**
              * Initiate a low-priority, asynchronous fetch that gets applied to the page
              *    only after it’s arrived. Works in all browsers with JavaScript enabled.
           */}
           <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Raleway&family=Bricolage+Grotesque&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&display=swap"
             media="print" onload="this.media='all'" />
 
           {/**
@@ -46,7 +46,7 @@ class CustomDocument extends Document {
           */}
           <noscript>
             <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Raleway&family=Bricolage+Grotesque&display=swap" />
+              href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&display=swap" />
           </noscript>
         </Head>
         <body>
