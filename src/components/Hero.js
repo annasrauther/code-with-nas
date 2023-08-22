@@ -44,7 +44,7 @@ const Hero = ({ terms }) => (
         </div>
         {/* Hero Image */}
         <div>
-            <Image src="/hero_banner.svg" alt="Hero Image" width={300} height={300} loading={'eager'} />
+            <Image src="/hero_banner.svg" alt="Hero Image" width={300} height={300} />
         </div>
     </div>
 );
