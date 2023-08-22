@@ -21,7 +21,7 @@ class CustomDocument extends Document {
           */}
           <link rel="preconnect"
             href="https://fonts.gstatic.com"
-            crossorigin />
+            crossOrigin={'true'} />
 
           {/**
              * Initiate a high-priority, asynchronous fetch for the CSS file. Works in most modern browsers.
@@ -36,7 +36,7 @@ class CustomDocument extends Document {
           */}
           <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque&display=swap"
-            media="print" onload="this.media='all'" />
+            media="print" onLoad="this.media='all'" />
 
           {/**
              * In the unlikely event that a visitor has intentionally disabled
