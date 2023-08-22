@@ -50,6 +50,7 @@ export const Logo = ({isHomePage}) => {
                 alt={data?.settings?.site_name || 'Code With Nas'}
                 width={'150'}
                 height={'90'}
+                loading={'eager'}
             />
         </Link>
     );
