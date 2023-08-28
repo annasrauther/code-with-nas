@@ -1,4 +1,4 @@
-# Code with Nas - HeadstartWp App
+# Code with Nas - HeadstartWP App
 
 "Code with Nas" is a focused Proof of Concept (POC) developed as part of a job application, inspired by insights from 30 Seconds of Code. It offers tailored code snippets and informative articles to enhance the development experience.
 
